@@ -18,6 +18,6 @@ public class Category extends AbstractModel {
     @Column(length = 255, nullable = false)
     private String name;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "categoryList")
     private List<Book> bookList;
 }

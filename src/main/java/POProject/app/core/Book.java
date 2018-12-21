@@ -48,19 +48,17 @@ public class Book extends AbstractModel {
     @JoinColumn(name="publisherId", nullable = false)
     private Publisher publisher;
 
-    //TODO manytomany
-
-    @ManyToMany(mappedBy = "bookList")
+    @ManyToMany
     private List<Author> authorList;
 
-    @ManyToMany(mappedBy = "bookList")
+    @ManyToMany
     private List<Category> categoryList;
 
     //Custom setters
 
     public void setReleaseYear(Integer year){
         Calendar calendar = new GregorianCalendar();
-        calendar.set(year, 0,0);
+        calendar.set(year, 1,1);
         this.releaseYear = new Date();
         this.releaseYear = calendar.getTime();
     }
@@ -73,4 +71,21 @@ public class Book extends AbstractModel {
         return calendar.get(Calendar.YEAR);
     }
 
+    //Custom constructors
+
+
+    public Book(@NonNull String title, @NonNull Integer pageCount, String ISBN, String about, Integer releaseYear, byte[] cover, Series series, Publisher publisher, List<Author> authorList, List<Category> categoryList) {
+        this.title = title;
+        this.pageCount = pageCount;
+        this.ISBN = ISBN;
+        this.about = about;
+        Calendar calendar = new GregorianCalendar();
+        calendar.set(releaseYear,0,1);
+        this.releaseYear = calendar.getTime();
+        this.cover = cover;
+        this.series = series;
+        this.publisher = publisher;
+        this.authorList = authorList;
+        this.categoryList = categoryList;
+    }
 }

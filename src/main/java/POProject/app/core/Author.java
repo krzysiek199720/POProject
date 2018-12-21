@@ -43,7 +43,7 @@ public class Author extends AbstractModel {
     private byte[] photo;
 
 
-    @ManyToMany()
+    @ManyToMany(mappedBy = "authorList")
     private List<Book> bookList;
 
 }
