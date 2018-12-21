@@ -1,5 +1,6 @@
 package POProject.core.utils;
 
+import POProject.app.core.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -16,6 +17,28 @@ public class HibernateUtils {
     private Session currentSession;
     private Transaction currentTransaction;
 
+    private static Configuration setClassesConfiguration(Configuration configuration){
+
+        configuration.addAnnotatedClass(Author.class);
+        configuration.addAnnotatedClass(Book.class);
+        configuration.addAnnotatedClass(Category.class);
+        configuration.addAnnotatedClass(Publisher.class);
+        configuration.addAnnotatedClass(Series.class);
+
+        return configuration;
+    }
+
+    private static void setSessionFactory(String pathConfiguration) {
+        Configuration configuration = new Configuration()
+                .configure(pathConfiguration);
+
+        configuration = setClassesConfiguration(configuration);
+
+        serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
+                configuration.getProperties()).build();
+
+        sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+    }
 
     public static void OpenConnection(String configurationPath){
         mainConfiguration = configurationPath;
@@ -33,16 +56,6 @@ public class HibernateUtils {
 
     public static ServiceRegistry getServiceRegistry() {
         return HibernateUtils.serviceRegistry;
-    }
-
-    private static void setSessionFactory(String pathConfiguration) {
-        Configuration configuration = new Configuration()
-                .configure(pathConfiguration);
-
-        serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
-                configuration.getProperties()).build();
-
-        sessionFactory = configuration.buildSessionFactory(serviceRegistry);
     }
 
 
