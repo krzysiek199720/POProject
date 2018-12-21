@@ -1,0 +1,6 @@
+.idea/
+log/
+target/
+dependency-reduced-pom.xml
+POProject.iml
+lombok.jar
