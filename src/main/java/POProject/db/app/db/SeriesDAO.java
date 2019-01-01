@@ -1,7 +1,7 @@
-package POProject.app.db;
+package POProject.db.app.db;
 
-import POProject.app.core.Series;
-import POProject.core.db.AbstractDAO;
+import POProject.db.app.core.Series;
+import POProject.db.core.db.AbstractDAO;
 
 public class SeriesDAO extends AbstractDAO<Series> {
 

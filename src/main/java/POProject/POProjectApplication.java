@@ -1,9 +1,9 @@
 package POProject;
 
-import POProject.app.core.*;
-import POProject.app.core.enums.Sex;
-import POProject.app.db.*;
-import POProject.core.utils.HibernateUtils;
+import POProject.db.app.core.*;
+import POProject.db.app.core.enums.Sex;
+import POProject.db.app.db.*;
+import POProject.db.core.utils.HibernateUtils;
 
 import java.util.ArrayList;
 import java.util.Date;

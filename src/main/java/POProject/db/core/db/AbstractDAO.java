@@ -1,8 +1,8 @@
-package POProject.core.db;
+package POProject.db.core.db;
 
-import POProject.core.core.AbstractModel;
-import POProject.core.utils.HibernateUtils;
-import POProject.core.utils.Utils;
+import POProject.db.core.core.AbstractModel;
+import POProject.db.core.utils.HibernateUtils;
+import POProject.db.core.utils.Utils;
 
 import java.util.List;
 

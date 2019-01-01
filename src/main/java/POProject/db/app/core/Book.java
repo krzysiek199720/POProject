@@ -1,9 +1,9 @@
-package POProject.app.core;
+package POProject.db.app.core;
 
 
 //https://dzone.com/articles/how-load-or-save-image-using
 
-import POProject.core.core.AbstractModel;
+import POProject.db.core.core.AbstractModel;
 import lombok.*;
 
 import javax.persistence.*;

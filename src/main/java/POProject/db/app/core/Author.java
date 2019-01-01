@@ -1,8 +1,8 @@
-package POProject.app.core;
+package POProject.db.app.core;
 
 
-import POProject.app.core.enums.Sex;
-import POProject.core.core.AbstractModel;
+import POProject.db.app.core.enums.Sex;
+import POProject.db.core.core.AbstractModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

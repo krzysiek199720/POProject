@@ -1,7 +1,7 @@
-package POProject.app.db;
+package POProject.db.app.db;
 
-import POProject.app.core.Category;
-import POProject.core.db.AbstractDAO;
+import POProject.db.app.core.Category;
+import POProject.db.core.db.AbstractDAO;
 
 public class CategoryDAO extends AbstractDAO<Category> {
 

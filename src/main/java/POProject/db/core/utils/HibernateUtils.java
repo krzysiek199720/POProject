@@ -1,6 +1,7 @@
-package POProject.core.utils;
+package POProject.db.core.utils;
 
 import POProject.app.core.*;
+import POProject.db.app.core.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;

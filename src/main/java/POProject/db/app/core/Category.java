@@ -1,6 +1,6 @@
-package POProject.app.core;
+package POProject.db.app.core;
 
-import POProject.core.core.AbstractModel;
+import POProject.db.core.core.AbstractModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

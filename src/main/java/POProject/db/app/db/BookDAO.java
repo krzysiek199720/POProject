@@ -1,8 +1,8 @@
-package POProject.app.db;
+package POProject.db.app.db;
 
-import POProject.app.core.Author;
-import POProject.app.core.Book;
-import POProject.core.db.AbstractDAO;
+import POProject.db.app.core.Author;
+import POProject.db.app.core.Book;
+import POProject.db.core.db.AbstractDAO;
 
 public class BookDAO extends AbstractDAO<Book> {
 

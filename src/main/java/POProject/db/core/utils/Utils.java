@@ -1,4 +1,4 @@
-package POProject.core.utils;
+package POProject.db.core.utils;
 
 public class Utils {
 

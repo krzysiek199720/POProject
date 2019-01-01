@@ -1,4 +1,4 @@
-package POProject.core.core;
+package POProject.db.core.core;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
