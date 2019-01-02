@@ -2,7 +2,7 @@ package POProject.controllers;
 
 import POProject.db.app.core.Author;
 import POProject.db.app.core.Book;
-import POProject.test.AnchorElem;
+import POProject.customNodes.AnchorSearchElem;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -76,8 +76,10 @@ public class SearchController {
     private VBox generateList(List<Book> bookList) throws IOException{
         VBox res = new VBox();
         for(Book book : bookList){
-            AnchorElem node;
+            AnchorSearchElem node;
             node = FXMLLoader.load(SearchController.class.getResource("/fxmls/searchElem.fxml"));
+
+            node.setBook(book);
 
             //0 - cover
             //1 - title
