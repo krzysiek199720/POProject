@@ -14,28 +14,36 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class mainController implements Initializable {
+public class MainController implements Initializable {
 
     @FXML
     private Button searchButton;
 
+    private Stage searchStage;
+
     public void searchAction(ActionEvent event){
+
+        if(searchStage != null){
+            searchStage.show();
+            System.out.println("aaa");
+            return;
+        }
+
         Parent root;
 
         try {
-            root = FXMLLoader.load(getClass().getResource("/fxmls/main.fxml"));
-            Stage stage = new Stage();
-            stage.setTitle("My New Stage Title");
-            stage.setScene(new Scene(root));
-            stage.resizableProperty().setValue(Boolean.FALSE);
-            stage.initStyle(StageStyle.UTILITY);
-            stage.show();
+            root = FXMLLoader.load(getClass().getResource("/fxmls/search.fxml"));
+            searchStage = new Stage();
+            searchStage.setTitle("My New Stage Title");
+            searchStage.setScene(new Scene(root));
+            searchStage.resizableProperty().setValue(Boolean.FALSE);
+            searchStage.initStyle(StageStyle.UTILITY);
+            searchStage.show();
+
         }
         catch (IOException e) {
             e.printStackTrace();
         }
-
-        System.out.println("aaa");
     }
 
 
