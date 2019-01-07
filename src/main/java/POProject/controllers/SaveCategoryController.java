@@ -1,9 +1,11 @@
 package POProject.controllers;
 
 import POProject.customNodes.AnchorCategory;
+import POProject.db.app.core.Category;
+import POProject.db.app.db.CategoryDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class SaveCategoryController {
@@ -12,18 +14,27 @@ public class SaveCategoryController {
     private AnchorCategory anchor;
 
     @FXML
-    private Button doneButton;
-
-    @FXML
     private TextField name;
 
     @FXML
     private TextField about;
 
+    @FXML
+    private Label doneStatus;
+
     public void done(ActionEvent actionEvent){
+
+        Category category = anchor.getCategory();
+
+        category.setName(name.getText());
+        category.setAbout(about.getText());
+
         //TODO saveOrUpdate
-        // pewnie zrobie tak ze przy tworzeniu bedzie sie podawac obiekt Category albo nie
-        // wiec jak null to nowy
+
+        CategoryDAO.getDAO().saveOrUpdate(category);
+
+        doneStatus.setText("Saved");
+
     }
 
 }

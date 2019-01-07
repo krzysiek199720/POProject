@@ -38,6 +38,8 @@ public class Author extends AbstractModel {
     @Enumerated(EnumType.STRING)
     private Sex sex;
 
+    private String about;
+
     @Lob
     @Column(columnDefinition = "mediumblob")
     private byte[] photo;

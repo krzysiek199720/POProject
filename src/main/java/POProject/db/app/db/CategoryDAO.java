@@ -12,4 +12,9 @@ public class CategoryDAO extends AbstractDAO<Category> {
         closeCurrentSession();
         return category;
     }
+
+    public static CategoryDAO getDAO(){
+        return new CategoryDAO();
+    }
+
 }

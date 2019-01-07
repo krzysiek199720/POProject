@@ -3,10 +3,14 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="121.0" prefWidth="152.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="POProject.controllers.MainController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="283.0" prefWidth="152.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="POProject.controllers.MainController">
    <children>
       <Button fx:id="searchButton" layoutX="50.0" layoutY="14.0" mnemonicParsing="false" onAction="#searchAction" text="Search" />
       <Button layoutX="68.0" layoutY="48.0" mnemonicParsing="false" />
-      <Button layoutX="68.0" layoutY="82.0" mnemonicParsing="false" />
+      <Button layoutX="31.0" layoutY="82.0" mnemonicParsing="false" onAction="#openPublisherStageAction" text="Add Publisher" />
+      <Button layoutX="31.0" layoutY="117.0" mnemonicParsing="false" onAction="#openCategoryStageAction" text="Add Category" />
+      <Button layoutX="39.0" layoutY="150.0" mnemonicParsing="false" onAction="#openSeriesStageAction" text="Add Series" />
+      <Button layoutX="39.0" layoutY="186.0" mnemonicParsing="false" onAction="#openAuthorStageAction" text="Add Author" />
+      <Button layoutX="52.0" layoutY="229.0" mnemonicParsing="false" onAction="#tmpFunction" text="tmp" />
    </children>
 </Pane>
