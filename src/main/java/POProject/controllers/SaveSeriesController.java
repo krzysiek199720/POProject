@@ -1,9 +1,11 @@
 package POProject.controllers;
 
 import POProject.customNodes.AnchorSeries;
+import POProject.db.app.core.Series;
+import POProject.db.app.db.SeriesDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class SaveSeriesController {
@@ -12,18 +14,25 @@ public class SaveSeriesController {
     private AnchorSeries anchor;
 
     @FXML
-    private Button doneButton;
-
-    @FXML
     private TextField name;
 
     @FXML
     private TextField about;
 
+    @FXML
+    private Label doneStatus;
+
     public void done(ActionEvent actionEvent){
+        Series series = anchor.getSeries();
+
+        series.setName(name.getText());
+        series.setAbout(about.getText());
+
         //TODO saveOrUpdate
-        // pewnie zrobie tak ze przy tworzeniu bedzie sie podawac obiekt Series albo nie
-        // wiec jak null to nowy
+
+        SeriesDAO.getDAO().saveOrUpdate(series);
+
+        doneStatus.setText("Saved");
     }
 
 }

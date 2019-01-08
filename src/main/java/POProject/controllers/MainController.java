@@ -9,6 +9,7 @@ import POProject.db.app.core.Category;
 import POProject.db.app.core.Publisher;
 import POProject.db.app.core.Series;
 import POProject.db.app.db.CategoryDAO;
+import POProject.db.app.db.SeriesDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -101,36 +102,40 @@ public class MainController implements Initializable {
     }
 
 
-    public void openSeriesStageAction(ActionEvent event){
+    public void openSeriesStageAction(ActionEvent event) throws IOException{
         setSeriesStage(new Series());
     }
-    public void setSeriesStage(Series series){
+    public void setSeriesStage(Series series) throws IOException{
 
         AnchorSeries root;
 
         if(saveSeriesStage != null){
-
             root = (AnchorSeries) saveSeriesStage.getScene().getRoot();
-            root.setSeries(series);
-
-            saveSeriesStage.show();
-            System.out.println("aaa");
-            return;
         }
-
-        try {
+        else {
             root = FXMLLoader.load(getClass().getResource("/fxmls/saveSeries.fxml"));
             saveSeriesStage = new Stage();
             saveSeriesStage.setTitle("My New Stage Title");
             saveSeriesStage.setScene(new Scene(root));
             saveSeriesStage.resizableProperty().setValue(Boolean.FALSE);
             saveSeriesStage.initStyle(StageStyle.UTILITY);
-            saveSeriesStage.show();
+        }
+        root.setSeries(series);
 
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+        //  0 - name
+        //  1 - about
+        //  2 - save Status
+
+        TextField name = (TextField)root.getChildren().get(0);
+        TextField about = (TextField)root.getChildren().get(1);
+
+        name.setText(series.getName());
+        about.setText(series.getAbout());
+
+        Label saveStatus = (Label) root.getChildren().get(2);
+        saveStatus.setText("");
+
+        saveSeriesStage.show();
     }
 
     public void openCategoryStageAction(ActionEvent event)throws IOException{
@@ -207,8 +212,8 @@ public class MainController implements Initializable {
 
     // TODO this is tmp pls remove as well as the fxml button which triggers it
     public void tmpFunction(ActionEvent event)throws IOException{
-        Category category = CategoryDAO.getDAO().findById(1L);
-        setCategoryStage(category);
+        Series series = SeriesDAO.getDAO().findById(1L);
+        setSeriesStage(series);
     }
 
     public void initialize(URL location, ResourceBundle resources) {

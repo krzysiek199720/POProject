@@ -12,4 +12,8 @@ public class SeriesDAO extends AbstractDAO<Series> {
         closeCurrentSession();
         return series;
     }
+
+    public static SeriesDAO getDAO(){
+        return new SeriesDAO();
+    }
 }
