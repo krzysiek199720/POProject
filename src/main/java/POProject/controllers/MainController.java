@@ -8,23 +8,29 @@ import POProject.db.app.core.Author;
 import POProject.db.app.core.Category;
 import POProject.db.app.core.Publisher;
 import POProject.db.app.core.Series;
-import POProject.db.app.db.CategoryDAO;
-import POProject.db.app.db.PublisherDAO;
-import POProject.db.app.db.SeriesDAO;
+import POProject.db.app.core.enums.Sex;
+import POProject.db.app.db.AuthorDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.chrono.Chronology;
+import java.time.chrono.IsoChronology;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
@@ -154,7 +160,6 @@ public class MainController implements Initializable {
         AnchorCategory root;
 
         if(saveCategoryStage != null){
-
             root = (AnchorCategory) saveCategoryStage.getScene().getRoot();
         }
         else {
@@ -180,28 +185,21 @@ public class MainController implements Initializable {
 
         Label saveStatus = (Label) root.getChildren().get(2);
         saveStatus.setText("");
+
+        saveCategoryStage.hide();
         saveCategoryStage.show();
     }
 
-    public void openAuthorStageAction(ActionEvent event){
+    public void openAuthorStageAction(ActionEvent event) throws IOException{
         setAuthorStage(new Author());
     }
-    public void setAuthorStage(Author author){
-
+    public void setAuthorStage(Author author)throws IOException{
         AnchorAuthor root;
 
         if(saveAuthorStage != null){
-
             root = (AnchorAuthor) saveAuthorStage.getScene().getRoot();
-            root.setAuthor(author);
-
-
-            saveAuthorStage.show();
-            System.out.println("aaa");
-            return;
         }
-
-        try {
+        else {
             root = FXMLLoader.load(getClass().getResource("/fxmls/saveAuthor.fxml"));
             root.setAuthor(author);
             saveAuthorStage = new Stage();
@@ -209,19 +207,55 @@ public class MainController implements Initializable {
             saveAuthorStage.setScene(new Scene(root));
             saveAuthorStage.resizableProperty().setValue(Boolean.FALSE);
             saveAuthorStage.initStyle(StageStyle.UTILITY);
-            saveAuthorStage.show();
+        }
 
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+
+        root.setAuthor(author);
+
+        //  0 - firstName
+        //  1 - lastName
+        //  2 - dOB
+        //  3 - dOD
+        //  4 - placeOB
+        //  5 - sex button male
+        //  6 - sex button female
+        //  7 - about
+        //  8 - photo
+
+        TextField firstName = (TextField)root.getChildren().get(0);
+        TextField lastName = (TextField)root.getChildren().get(1);
+        DatePicker dOB = (DatePicker)root.getChildren().get(2);
+        DatePicker dOD = (DatePicker)root.getChildren().get(3);
+        TextField placeOB = (TextField)root.getChildren().get(4);
+        RadioButton male = (RadioButton)root.getChildren().get(5);
+        RadioButton female = (RadioButton)root.getChildren().get(6);
+        TextField about = (TextField)root.getChildren().get(7);
+        ImageView photo = (ImageView)root.getChildren().get(8);
+        Label saveStatus = (Label)root.getChildren().get(9);
+
+        firstName.setText(author.getFirstName());
+        lastName.setText(author.getLastName());
+        dOB.setValue( (author.getDateOfBirth() == null) ? null : author.getDateOfBirth().toInstant().atZone(ZoneId.systemDefault()).toLocalDate() );
+        dOD.setValue((author.getDateOfDeath() == null) ? null : author.getDateOfDeath().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        placeOB.setText(author.getPlaceOfBirth());
+        if(author.getSex() == Sex.male)
+            male.selectedProperty().set(true);
+        else
+            female.selectedProperty().set(true);
+        about.setText(author.getAbout());
+        photo.setImage((author.getPhoto() == null) ? null : new Image(new ByteArrayInputStream(author.getPhoto())));
+
+        saveStatus.setText("");
+        saveAuthorStage.hide();
+        saveAuthorStage.show();
     }
 
 
     // TODO this is tmp pls remove as well as the fxml button which triggers it
     public void tmpFunction(ActionEvent event)throws IOException{
-        Publisher publisher = PublisherDAO.getDAO().findById(1L);
-        setPublisherStage(publisher);
+
+        Author author = AuthorDAO.getDAO().findById(1L);
+        setAuthorStage(author);
     }
 
     public void initialize(URL location, ResourceBundle resources) {

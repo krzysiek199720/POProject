@@ -22,4 +22,8 @@ public class BookDAO extends AbstractDAO<Book> {
         closeCurrentSession();
         return bookRes;
     }
+
+    public static BookDAO getDAO(){
+        return new BookDAO();
+    }
 }

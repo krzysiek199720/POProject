@@ -3,12 +3,11 @@ package POProject.controllers;
 import POProject.customNodes.AnchorAuthor;
 import POProject.db.app.core.Author;
 import POProject.db.app.core.enums.Sex;
+import POProject.db.app.db.AuthorDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
+import javafx.scene.Node;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
@@ -50,22 +49,60 @@ public class SaveAuthorController {
     @FXML
     private ImageView photo;
 
+    @FXML
+    private Label doneStatus;
+
     public void done(ActionEvent actionEvent){
         Author author = anchor.getAuthor();
 
+        boolean terminate = false;
+
+        if(firstName.getText().equals("")){
+            setNodeToErrorColor(firstName);
+            terminate = true;
+        }
+
+        if(lastName.getText().equals("")){
+            setNodeToErrorColor(lastName);
+            terminate = true;
+        }
+
+        if(placeOB.getText().equals("")){
+            setNodeToErrorColor(placeOB);
+            terminate = true;
+        }
+
+        if(dOB.getValue() == null){
+            setNodeToErrorColor(dOB);
+            terminate = true;
+        }
+
+        if(dOD.getValue() != null) {
+            if(dOB.getValue().isAfter(dOD.getValue()))
+            {
+                setNodeToErrorColor(dOD);
+                terminate = true;
+            }
+        }
+
+        if(terminate)
+            return;
+
         author.setFirstName(firstName.getText());
         author.setLastName(lastName.getText());
-
-        author.setDateOfBirth(Date.valueOf(dOB.getValue()));
-        author.setDateOfDeath(Date.valueOf(dOD.getValue()));
         author.setPlaceOfBirth(placeOB.getText());
-
         author.setAbout(about.getText());
-
         author.setSex( male.isSelected() ? Sex.male : Sex.female );
+        author.setDateOfBirth(Date.valueOf(dOB.getValue()));
+        author.setDateOfDeath( (dOD.getValue() == null) ? null :Date.valueOf(dOD.getValue()));
 
-        //TODO saveOrUpdate
+        AuthorDAO.getDAO().saveOrUpdate(author);
 
+        doneStatus.setText("Saved");
+    }
+
+    private void setNodeToErrorColor(Node node){
+        node.setStyle("-fx-background-color: #ff0000");
     }
 
     public void setPhoto(ActionEvent event) throws IOException {

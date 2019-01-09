@@ -11,8 +11,11 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class POProjectApplication extends Application {
@@ -24,8 +27,8 @@ public class POProjectApplication extends Application {
 
         //TESTING TESTING
 
-        Date date = new Date();
-        date.setTime(56465465L);
+        Date date = new Date(1546988400000L);
+
 
         Category category = new Category("name","about",null);
         Author author1 = new Author("fn","ln",date,null,"Africa", Sex.male,"about", null,null);

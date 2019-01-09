@@ -11,19 +11,10 @@
 
 <AnchorAuthor fx:id="anchor" prefHeight="364.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="POProject.controllers.SaveAuthorController">
    <children>
-      <Button fx:id="doneButton" layoutX="677.0" layoutY="324.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="59.0" text="Done" />
       <TextField fx:id="firstName" layoutX="70.0" layoutY="39.0" prefHeight="25.0" prefWidth="264.0" />
-      <Label layoutX="11.0" layoutY="39.0" prefHeight="25.0" prefWidth="63.0" text="FirstName:" />
-      <Label layoutX="173.0" layoutY="155.0" text="About:" />
-      <TextField fx:id="about" layoutX="213.0" layoutY="155.0" prefHeight="180.0" prefWidth="462.0" />
-      <Label layoutX="339.0" layoutY="14.0" text="Author" />
-      <Label layoutX="11.0" layoutY="77.0" prefHeight="17.0" prefWidth="63.0" text="LastName:" />
       <TextField fx:id="lastName" layoutX="70.0" layoutY="74.0" prefHeight="25.0" prefWidth="264.0" />
       <DatePicker fx:id="dOB" layoutX="406.0" layoutY="39.0" prefWidth="264.0" />
       <DatePicker fx:id="dOD" layoutX="406.0" layoutY="73.0" prefWidth="264.0" />
-      <Label layoutX="334.0" layoutY="30.0" prefHeight="44.0" prefWidth="64.0" text="Date Of Birth:" textAlignment="CENTER" wrapText="true" />
-      <Label layoutX="334.0" layoutY="64.0" prefHeight="44.0" prefWidth="64.0" text="Date Of Death:" textAlignment="CENTER" wrapText="true" />
-      <Label layoutX="334.0" layoutY="109.0" prefHeight="44.0" prefWidth="64.0" text="Place Of Birth:" textAlignment="CENTER" wrapText="true" />
       <TextField fx:id="placeOB" layoutX="406.0" layoutY="118.0" prefWidth="264.0" />
       <RadioButton fx:id="male" layoutX="70.0" layoutY="123.0" mnemonicParsing="false" selected="true" text="Male">
          <toggleGroup>
@@ -31,8 +22,18 @@
          </toggleGroup>
       </RadioButton>
       <RadioButton layoutX="143.0" layoutY="123.0" mnemonicParsing="false" text="Female" toggleGroup="$Sex" />
-      <Label layoutX="22.0" layoutY="123.0" text="Sex:" />
+      <TextField fx:id="about" layoutX="213.0" layoutY="155.0" prefHeight="180.0" prefWidth="462.0" />
       <ImageView fx:id="photo" fitHeight="168.0" fitWidth="120.0" layoutX="43.0" layoutY="153.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="doneStatus" layoutX="675.0" layoutY="300.0" prefHeight="20.0" prefWidth="63.0" textAlignment="CENTER" />
+      <Button fx:id="doneButton" layoutX="677.0" layoutY="324.0" mnemonicParsing="false" onAction="#done" prefHeight="30.0" prefWidth="59.0" text="Done" />
+      <Label layoutX="11.0" layoutY="39.0" prefHeight="25.0" prefWidth="63.0" text="FirstName:" />
+      <Label layoutX="173.0" layoutY="155.0" text="About:" />
+      <Label layoutX="339.0" layoutY="14.0" text="Author" />
+      <Label layoutX="11.0" layoutY="77.0" prefHeight="17.0" prefWidth="63.0" text="LastName:" />
+      <Label layoutX="334.0" layoutY="30.0" prefHeight="44.0" prefWidth="64.0" text="Date Of Birth:" textAlignment="CENTER" wrapText="true" />
+      <Label layoutX="334.0" layoutY="64.0" prefHeight="44.0" prefWidth="64.0" text="Date Of Death:" textAlignment="CENTER" wrapText="true" />
+      <Label layoutX="334.0" layoutY="109.0" prefHeight="44.0" prefWidth="64.0" text="Place Of Birth:" textAlignment="CENTER" wrapText="true" />
+      <Label layoutX="22.0" layoutY="123.0" text="Sex:" />
       <Button fx:id="selectButton" layoutX="50.0" layoutY="326.0" mnemonicParsing="false" onAction="#setPhoto" text="Select" />
       <Button fx:id="removeButton" layoutX="103.0" layoutY="326.0" mnemonicParsing="false" onAction="#removePhoto" text="Remove" />
       <Label layoutX="5.0" layoutY="155.0" text="Photo:" />

@@ -12,4 +12,8 @@ public class AuthorDAO extends AbstractDAO<Author> {
         closeCurrentSession();
         return author;
     }
+
+    public static AuthorDAO getDAO(){
+        return new AuthorDAO();
+    }
 }
