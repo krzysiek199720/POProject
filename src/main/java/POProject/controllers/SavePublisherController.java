@@ -1,9 +1,11 @@
 package POProject.controllers;
 
 import POProject.customNodes.AnchorPublisher;
+import POProject.db.app.core.Publisher;
+import POProject.db.app.db.PublisherDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class SavePublisherController {
@@ -12,18 +14,23 @@ public class SavePublisherController {
     private AnchorPublisher anchor;
 
     @FXML
-    private Button doneButton;
-
-    @FXML
     private TextField name;
 
     @FXML
     private TextField about;
 
+    @FXML
+    private Label doneStatus;
+
     public void done(ActionEvent actionEvent){
-        //TODO saveOrUpdate
-        // pewnie zrobie tak ze przy tworzeniu bedzie sie podawac obiekt Publisher albo nie
-        // wiec jak null to nowy
+        Publisher publisher = anchor.getPublisher();
+
+        publisher.setName(name.getText());
+        publisher.setAbout(about.getText());
+
+        PublisherDAO.getDAO().saveOrUpdate(publisher);
+
+        doneStatus.setText("Saved");
     }
 
 }

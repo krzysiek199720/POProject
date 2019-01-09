@@ -12,4 +12,8 @@ public class PublisherDAO extends AbstractDAO<Publisher> {
         closeCurrentSession();
         return publisher;
     }
+
+    public static PublisherDAO getDAO(){
+        return new PublisherDAO();
+    }
 }

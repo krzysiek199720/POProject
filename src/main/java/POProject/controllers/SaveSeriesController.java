@@ -28,8 +28,6 @@ public class SaveSeriesController {
         series.setName(name.getText());
         series.setAbout(about.getText());
 
-        //TODO saveOrUpdate
-
         SeriesDAO.getDAO().saveOrUpdate(series);
 
         doneStatus.setText("Saved");

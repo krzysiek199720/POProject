@@ -9,6 +9,7 @@ import POProject.db.app.core.Category;
 import POProject.db.app.core.Publisher;
 import POProject.db.app.core.Series;
 import POProject.db.app.db.CategoryDAO;
+import POProject.db.app.db.PublisherDAO;
 import POProject.db.app.db.SeriesDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -69,36 +70,43 @@ public class MainController implements Initializable {
         }
     }
 
-    public void openPublisherStageAction(ActionEvent event){
+    public void openPublisherStageAction(ActionEvent event) throws IOException{
         setPublisherStage(new Publisher());
     }
-    public void setPublisherStage(Publisher publisher){
+    public void setPublisherStage(Publisher publisher) throws IOException{
 
         AnchorPublisher root;
 
         if(savePublisherStage != null){
 
             root = (AnchorPublisher) savePublisherStage.getScene().getRoot();
-            root.setPublisher(publisher);
 
-            savePublisherStage.show();
-            System.out.println("aaa");
-            return;
         }
-
-        try {
+        else {
             root = FXMLLoader.load(getClass().getResource("/fxmls/savePublisher.fxml"));
             savePublisherStage = new Stage();
             savePublisherStage.setTitle("My New Stage Title");
             savePublisherStage.setScene(new Scene(root));
             savePublisherStage.resizableProperty().setValue(Boolean.FALSE);
             savePublisherStage.initStyle(StageStyle.UTILITY);
-            savePublisherStage.show();
+        }
 
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+        root.setPublisher(publisher);
+
+        //  0 - name
+        //  1 - about
+        //  2 - save Status
+
+        TextField name = (TextField)root.getChildren().get(0);
+        TextField about = (TextField)root.getChildren().get(1);
+
+        name.setText(publisher.getName());
+        about.setText(publisher.getAbout());
+
+        Label saveStatus = (Label) root.getChildren().get(2);
+        saveStatus.setText("");
+
+        savePublisherStage.show();
     }
 
 
@@ -212,8 +220,8 @@ public class MainController implements Initializable {
 
     // TODO this is tmp pls remove as well as the fxml button which triggers it
     public void tmpFunction(ActionEvent event)throws IOException{
-        Series series = SeriesDAO.getDAO().findById(1L);
-        setSeriesStage(series);
+        Publisher publisher = PublisherDAO.getDAO().findById(1L);
+        setPublisherStage(publisher);
     }
 
     public void initialize(URL location, ResourceBundle resources) {
