@@ -57,17 +57,17 @@ public class SaveAuthorController {
 
         boolean terminate = false;
 
-        if(firstName.getText().equals("")){
+        if(firstName.getText() == null || firstName.getText().equals("")){
             setNodeToErrorColor(firstName);
             terminate = true;
         }
 
-        if(lastName.getText().equals("")){
+        if(lastName.getText() == null || lastName.getText().equals("")){
             setNodeToErrorColor(lastName);
             terminate = true;
         }
 
-        if(placeOB.getText().equals("")){
+        if(placeOB.getText() == null || placeOB.getText().equals("")){
             setNodeToErrorColor(placeOB);
             terminate = true;
         }
