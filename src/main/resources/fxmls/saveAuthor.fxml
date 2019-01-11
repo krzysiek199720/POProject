@@ -5,6 +5,7 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.ImageView?>
@@ -22,7 +23,7 @@
          </toggleGroup>
       </RadioButton>
       <RadioButton layoutX="143.0" layoutY="123.0" mnemonicParsing="false" text="Female" toggleGroup="$Sex" />
-      <TextField fx:id="about" layoutX="213.0" layoutY="155.0" prefHeight="180.0" prefWidth="462.0" />
+      <TextArea fx:id="about" layoutX="213.0" layoutY="155.0" prefHeight="180.0" prefWidth="462.0" wrapText="true" />
       <ImageView fx:id="photo" fitHeight="168.0" fitWidth="120.0" layoutX="43.0" layoutY="153.0" pickOnBounds="true" preserveRatio="true" />
       <Label fx:id="doneStatus" layoutX="675.0" layoutY="300.0" prefHeight="20.0" prefWidth="63.0" textAlignment="CENTER" />
       <Button fx:id="doneButton" layoutX="677.0" layoutY="324.0" mnemonicParsing="false" onAction="#done" prefHeight="30.0" prefWidth="59.0" text="Done" />

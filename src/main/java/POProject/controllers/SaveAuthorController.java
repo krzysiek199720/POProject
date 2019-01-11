@@ -38,7 +38,7 @@ public class SaveAuthorController {
     private DatePicker dOD;
 
     @FXML
-    private TextField about;
+    private TextArea about;
 
     @FXML
     private TextField placeOB;

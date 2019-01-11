@@ -1,19 +1,14 @@
 package POProject.controllers;
 
-import POProject.customNodes.AnchorAuthor;
-import POProject.customNodes.AnchorCategory;
-import POProject.customNodes.AnchorPublisher;
-import POProject.customNodes.AnchorSeries;
-import POProject.db.app.core.Author;
-import POProject.db.app.core.Category;
-import POProject.db.app.core.Publisher;
-import POProject.db.app.core.Series;
+import POProject.customNodes.*;
+import POProject.db.app.core.*;
 import POProject.db.app.core.enums.Sex;
-import POProject.db.app.db.AuthorDAO;
+import POProject.db.app.db.BookDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -25,12 +20,7 @@ import javafx.stage.StageStyle;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URL;
-import java.time.Instant;
-import java.time.LocalDate;
 import java.time.ZoneId;
-import java.time.chrono.Chronology;
-import java.time.chrono.IsoChronology;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
@@ -104,14 +94,18 @@ public class MainController implements Initializable {
         //  2 - save Status
 
         TextField name = (TextField)root.getChildren().get(0);
-        TextField about = (TextField)root.getChildren().get(1);
+        TextArea about = (TextArea)root.getChildren().get(1);
 
         name.setText(publisher.getName());
         about.setText(publisher.getAbout());
 
         Label saveStatus = (Label) root.getChildren().get(2);
-        saveStatus.setText("");
 
+        for(Node node : root.getChildren())
+            node.setStyle("");
+
+        saveStatus.setText("");
+        savePublisherStage.hide();
         savePublisherStage.show();
     }
 
@@ -141,14 +135,18 @@ public class MainController implements Initializable {
         //  2 - save Status
 
         TextField name = (TextField)root.getChildren().get(0);
-        TextField about = (TextField)root.getChildren().get(1);
+        TextArea about = (TextArea)root.getChildren().get(1);
 
         name.setText(series.getName());
         about.setText(series.getAbout());
 
         Label saveStatus = (Label) root.getChildren().get(2);
-        saveStatus.setText("");
 
+        for(Node node : root.getChildren())
+            node.setStyle("");
+
+        saveStatus.setText("");
+        saveSeriesStage.hide();
         saveSeriesStage.show();
     }
 
@@ -178,14 +176,17 @@ public class MainController implements Initializable {
         //  1 - about
         //  2 - save Status
         TextField name = (TextField)root.getChildren().get(0);
-        TextField about = (TextField)root.getChildren().get(1);
+        TextArea about = (TextArea)root.getChildren().get(1);
 
         name.setText(category.getName());
         about.setText(category.getAbout());
 
         Label saveStatus = (Label) root.getChildren().get(2);
-        saveStatus.setText("");
 
+        for(Node node : root.getChildren())
+            node.setStyle("");
+
+        saveStatus.setText("");
         saveCategoryStage.hide();
         saveCategoryStage.show();
     }
@@ -201,7 +202,6 @@ public class MainController implements Initializable {
         }
         else {
             root = FXMLLoader.load(getClass().getResource("/fxmls/saveAuthor.fxml"));
-            root.setAuthor(author);
             saveAuthorStage = new Stage();
             saveAuthorStage.setTitle("My New Stage Title");
             saveAuthorStage.setScene(new Scene(root));
@@ -229,7 +229,7 @@ public class MainController implements Initializable {
         TextField placeOB = (TextField)root.getChildren().get(4);
         RadioButton male = (RadioButton)root.getChildren().get(5);
         RadioButton female = (RadioButton)root.getChildren().get(6);
-        TextField about = (TextField)root.getChildren().get(7);
+        TextArea about = (TextArea)root.getChildren().get(7);
         ImageView photo = (ImageView)root.getChildren().get(8);
         Label saveStatus = (Label)root.getChildren().get(9);
 
@@ -244,6 +244,9 @@ public class MainController implements Initializable {
             female.selectedProperty().set(true);
         about.setText(author.getAbout());
         photo.setImage((author.getPhoto() == null) ? null : new Image(new ByteArrayInputStream(author.getPhoto())));
+
+        for(Node node : root.getChildren())
+            node.setStyle("");
 
         saveStatus.setText("");
         saveAuthorStage.hide();

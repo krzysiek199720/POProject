@@ -5,11 +5,13 @@ import POProject.db.app.core.enums.Sex;
 import POProject.db.app.db.*;
 import POProject.db.core.utils.HibernateUtils;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -76,6 +78,11 @@ public class POProjectApplication extends Application {
 
         primaryStage.setX(0.0);
         primaryStage.setY(0.0);
+
+        primaryStage.setOnCloseRequest((WindowEvent event) -> {
+            Platform.exit();
+            System.exit(0);
+        });
 
         primaryStage.show();
     }
