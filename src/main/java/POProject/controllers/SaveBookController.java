@@ -97,11 +97,6 @@ public class SaveBookController  implements Initializable {
             terminate = true;
         }else  setNodeToNormal(releaseYear);
 
-        if(series.getValue() == null){
-            setNodeToErrorColor(series);
-            terminate = true;
-        }else setNodeToNormal(series);
-
         if(publisher.getValue() == null){
             setNodeToErrorColor(publisher);
             terminate = true;
@@ -175,6 +170,8 @@ public class SaveBookController  implements Initializable {
 
     @FXML
     private void addAuthor(ActionEvent event){
+        if(authors.getValue() == null)
+            return;
         Author newAuthor = authors.getValue();
         authorsList.getItems().add(newAuthor);
         authors.getSelectionModel().clearSelection();
@@ -184,6 +181,8 @@ public class SaveBookController  implements Initializable {
 
     @FXML
     private void addCategory(ActionEvent event){
+        if(categories.getValue() == null)
+            return;
         Category newCategory = categories.getValue();
         categoriesList.getItems().add(newCategory);
         categories.getSelectionModel().clearSelection();
