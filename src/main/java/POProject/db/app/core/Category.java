@@ -1,14 +1,13 @@
 package POProject.db.app.core;
 
 import POProject.db.core.core.AbstractModel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -22,4 +21,9 @@ public class Category extends AbstractModel {
 
     @ManyToMany(mappedBy = "categoryList")
     private List<Book> bookList;
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

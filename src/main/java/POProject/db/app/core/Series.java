@@ -2,15 +2,14 @@ package POProject.db.app.core;
 
 
 import POProject.db.core.core.AbstractModel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -21,4 +20,9 @@ public class Series extends AbstractModel {
     private String name;
 
     private String about;
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

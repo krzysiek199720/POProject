@@ -3,16 +3,14 @@ package POProject.db.app.core;
 
 import POProject.db.app.core.enums.Sex;
 import POProject.db.core.core.AbstractModel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -48,4 +46,8 @@ public class Author extends AbstractModel {
     @ManyToMany(mappedBy = "authorList")
     private List<Book> bookList;
 
+    @Override
+    public String toString() {
+        return (firstName + " " + lastName);
+    }
 }
