@@ -17,6 +17,8 @@ public abstract class AbstractDAO<T extends AbstractModel> extends HibernateUtil
 
     public abstract T findById(Long id);
 
+    public abstract List<T> getAll();
+
     public void delete(T entity) {
         openCurrentSessionWithTransaction();
         getCurrentSession().delete(entity);
