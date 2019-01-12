@@ -5,16 +5,34 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class FilteredComboBox<T> extends ComboBox<T> {
 
+    private boolean initialized = false;
+    @Setter
+    @Getter
     private T selectedItem;
     private FilteredList<T> fList;
+
+    public void addD(T item){
+        List<T> aL = new ArrayList<>(this.getItems());
+        aL.add(item);
+        this.set(aL);
+    }
+
+    public void remD(T item){
+        List<T> aL = new ArrayList<>(this.getItems());
+        aL.remove(item);
+        this.set(aL);
+    }
 
     private void setContent(List<T> items){
         ObservableList<T> oList = FXCollections.observableArrayList(items);
@@ -24,9 +42,12 @@ public class FilteredComboBox<T> extends ComboBox<T> {
         this.setItems(fList);
     }
 
-    public void initialize(List<T> items) {
+    public void set(List<T> items) {
 
         setContent(items);
+
+        if(initialized)
+            return;
 
         this.addEventHandler(KeyEvent.KEY_PRESSED, event ->
         {
@@ -39,8 +60,7 @@ public class FilteredComboBox<T> extends ComboBox<T> {
         this.showingProperty().addListener((observable, oldValue, newValue) ->{
             // if its now showing
             if(newValue){
-                ListView<T> lv = ((ComboBoxListViewSkin<T>) this.getSkin()).getListView();
-                lv.scrollTo(this.getValue());
+                selectedItem = null;
             } else{
                 T value = this.getValue();
                 if( value != null)
@@ -76,5 +96,8 @@ public class FilteredComboBox<T> extends ComboBox<T> {
         });
         this.setSkin(comboBoxListViewSkin);
 
+
+        initialized = true;
     }
+
 }
