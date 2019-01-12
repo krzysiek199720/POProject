@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import POProject.customNodes.AnchorBook?>
+<?import POProject.customNodes.FilteredComboBox?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchor" prefHeight="490.0" prefWidth="904.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="POProject.controllers.SaveBookController">
+<AnchorBook fx:id="anchor" prefHeight="490.0" prefWidth="904.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="POProject.controllers.SaveBookController">
    <children>
       <TextField fx:id="title" layoutX="43.0" layoutY="39.0" prefHeight="25.0" prefWidth="279.0" />
       <TextField fx:id="ISBN" layoutX="43.0" layoutY="77.0" prefHeight="25.0" prefWidth="279.0" />
       <TextField fx:id="pageCount" alignment="CENTER_RIGHT" layoutX="82.0" layoutY="118.0" prefHeight="25.0" prefWidth="241.0" />
       <TextField fx:id="releaseYear" alignment="CENTER_RIGHT" layoutX="82.0" layoutY="151.0" prefHeight="25.0" prefWidth="241.0" />
-      <ComboBox fx:id="series" layoutX="82.0" layoutY="189.0" prefHeight="25.0" prefWidth="172.0" />
-      <ComboBox fx:id="publisher" layoutX="82.0" layoutY="230.0" prefHeight="25.0" prefWidth="172.0" />
-      <ComboBox fx:id="authors" layoutX="388.0" layoutY="39.0" prefHeight="25.0" prefWidth="213.0" />
+      <FilteredComboBox fx:id="series" layoutX="82.0" layoutY="189.0" prefHeight="25.0" prefWidth="172.0" />
+      <FilteredComboBox fx:id="publisher" layoutX="82.0" layoutY="230.0" prefHeight="25.0" prefWidth="172.0" />
+      <FilteredComboBox fx:id="authors" layoutX="388.0" layoutY="39.0" prefHeight="25.0" prefWidth="213.0" />
       <ListView fx:id="authorsList" layoutX="611.0" layoutY="39.0" prefHeight="125.0" prefWidth="279.0" />
-      <ComboBox fx:id="categories" layoutX="389.0" layoutY="172.0" prefHeight="25.0" prefWidth="213.0" />
+      <FilteredComboBox fx:id="categories" layoutX="389.0" layoutY="172.0" prefHeight="25.0" prefWidth="213.0" />
       <ListView fx:id="categoriesList" layoutX="611.0" layoutY="172.0" prefHeight="100.0" prefWidth="279.0" />
       <ImageView fx:id="cover" fitHeight="168.0" fitWidth="120.0" layoutX="50.0" layoutY="279.0" pickOnBounds="true" preserveRatio="true" />
       <TextArea fx:id="about" layoutX="217.0" layoutY="279.0" prefHeight="197.0" prefWidth="602.0" wrapText="true" />
       <Label fx:id="doneStatus" layoutX="829.0" layoutY="419.0" prefHeight="20.0" prefWidth="63.0" textAlignment="CENTER" />
-      <Button fx:id="seriesAdd" layoutX="259.0" layoutY="189.0" mnemonicParsing="false" text="Add new" />
-      <Button fx:id="publisherAdd" layoutX="259.0" layoutY="230.0" mnemonicParsing="false" text="Add new" />
-      <Button fx:id="authorsAddNew" layoutX="389.0" layoutY="77.0" mnemonicParsing="false" text="Add new" />
-      <Button fx:id="authorsAdd" layoutX="473.0" layoutY="77.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="45.0" text="Add" />
-      <Button fx:id="authorsRemove" layoutX="542.0" layoutY="77.0" mnemonicParsing="false" text="Remove" />
-      <Button fx:id="categoriesAddNew" layoutX="389.0" layoutY="210.0" mnemonicParsing="false" text="Add new" />
-      <Button fx:id="categoriesAdd" layoutX="472.0" layoutY="210.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="45.0" text="Add" />
-      <Button fx:id="categoriesRemove" layoutX="542.0" layoutY="210.0" mnemonicParsing="false" text="Remove" />
+      <Button fx:id="seriesAdd" layoutX="259.0" layoutY="189.0" mnemonicParsing="false" onAction="#refreshSeries" text="Refresh" />
+      <Button fx:id="publisherRefresh" layoutX="259.0" layoutY="230.0" mnemonicParsing="false" onAction="#refreshPublisher" text="Refresh" />
+      <Button fx:id="authorsAddRefresh" layoutX="389.0" layoutY="77.0" mnemonicParsing="false" onAction="#refreshAuthor" text="Refresh" />
+      <Button fx:id="authorsAdd" layoutX="473.0" layoutY="77.0" mnemonicParsing="false" onAction="#addAuthor" prefHeight="25.0" prefWidth="45.0" text="Add" />
+      <Button fx:id="authorsRemove" layoutX="542.0" layoutY="77.0" mnemonicParsing="false" onAction="#removeAuthor" text="Remove" />
+      <Button fx:id="categoriesAddRefresh" layoutX="389.0" layoutY="210.0" mnemonicParsing="false" onAction="#refreshCategory" text="Refresh" />
+      <Button fx:id="categoriesAdd" layoutX="472.0" layoutY="210.0" mnemonicParsing="false" onAction="#addCategory" prefHeight="25.0" prefWidth="45.0" text="Add" />
+      <Button fx:id="categoriesRemove" layoutX="542.0" layoutY="210.0" mnemonicParsing="false" onAction="#removeCategory" text="Remove" />
       <Button fx:id="selectButton" layoutX="51.0" layoutY="451.0" mnemonicParsing="false" onAction="#setCover" text="Select" />
       <Button fx:id="removeButton" layoutX="110.0" layoutY="451.0" mnemonicParsing="false" onAction="#removeCover" text="Remove" />
       <Button fx:id="doneButton" layoutX="831.0" layoutY="449.0" mnemonicParsing="false" onAction="#done" prefHeight="30.0" prefWidth="59.0" text="Done" />
@@ -51,4 +51,4 @@
             <Font name="System Bold" size="12.0" />
          </font></Label>
    </children>
-</AnchorPane>
+</AnchorBook>

@@ -5,6 +5,8 @@ package POProject.db.app.core;
 
 import POProject.db.core.core.AbstractModel;
 import lombok.*;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.Calendar;
@@ -48,10 +50,13 @@ public class Book extends AbstractModel {
     @JoinColumn(name="publisherId", nullable = false)
     private Publisher publisher;
 
+
     @ManyToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Author> authorList;
 
     @ManyToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Category> categoryList;
 
     //Custom setters
@@ -67,6 +72,8 @@ public class Book extends AbstractModel {
 
     public Integer getReleaseYear(){
         Calendar calendar = new GregorianCalendar();
+        if(this.releaseYear == null)
+            return null;
         calendar.setTime(this.releaseYear);
         return calendar.get(Calendar.YEAR);
     }

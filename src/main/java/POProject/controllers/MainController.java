@@ -3,7 +3,8 @@ package POProject.controllers;
 import POProject.customNodes.*;
 import POProject.db.app.core.*;
 import POProject.db.app.core.enums.Sex;
-import POProject.db.app.db.BookDAO;
+import POProject.db.app.db.*;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,6 +22,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.time.ZoneId;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
@@ -70,7 +72,7 @@ public class MainController implements Initializable {
     public void openPublisherStageAction(ActionEvent event) throws IOException{
         setPublisherStage(new Publisher());
     }
-    public void setPublisherStage(Publisher publisher) throws IOException{
+    public Publisher setPublisherStage(Publisher publisher) throws IOException{
 
         AnchorPublisher root;
 
@@ -108,13 +110,15 @@ public class MainController implements Initializable {
         saveStatus.setText("");
         savePublisherStage.hide();
         savePublisherStage.show();
+
+        return publisher;
     }
 
 
     public void openSeriesStageAction(ActionEvent event) throws IOException{
         setSeriesStage(new Series());
     }
-    public void setSeriesStage(Series series) throws IOException{
+    public Series setSeriesStage(Series series) throws IOException{
 
         AnchorSeries root;
 
@@ -149,12 +153,14 @@ public class MainController implements Initializable {
         saveStatus.setText("");
         saveSeriesStage.hide();
         saveSeriesStage.show();
+
+        return series;
     }
 
     public void openCategoryStageAction(ActionEvent event)throws IOException{
         setCategoryStage(new Category());
     }
-    public void setCategoryStage(Category category) throws IOException{
+    public Category setCategoryStage(Category category) throws IOException{
 
         AnchorCategory root;
 
@@ -190,12 +196,13 @@ public class MainController implements Initializable {
         saveStatus.setText("");
         saveCategoryStage.hide();
         saveCategoryStage.show();
+        return category;
     }
 
     public void openAuthorStageAction(ActionEvent event) throws IOException{
         setAuthorStage(new Author());
     }
-    public void setAuthorStage(Author author)throws IOException{
+    public Author setAuthorStage(Author author)throws IOException{
         AnchorAuthor root;
 
         if(saveAuthorStage != null){
@@ -252,13 +259,15 @@ public class MainController implements Initializable {
         saveStatus.setText("");
         saveAuthorStage.hide();
         saveAuthorStage.show();
+
+        return author;
     }
 
     public void openABookStageAction(ActionEvent event) throws IOException{
         setBookStage(new Book());
     }
 
-    public void setBookStage(Book book) throws IOException{
+    public Book setBookStage(Book book) throws IOException{
         AnchorBook root;
 
         if(saveBookStage != null){
@@ -289,12 +298,67 @@ public class MainController implements Initializable {
         // 11 - about
         // 12 - doneStatus
 
+        TextField title = (TextField) root.getChildren().get(0);
+        TextField ISBN = (TextField) root.getChildren().get(1);
+        TextField pageCount = (TextField) root.getChildren().get(2);
+        TextField releaseYear = (TextField) root.getChildren().get(3);
+        FilteredComboBox<Series> series = (FilteredComboBox) root.getChildren().get(4);
+        FilteredComboBox<Publisher> publisher = (FilteredComboBox) root.getChildren().get(5);
+        FilteredComboBox<Author> authors = (FilteredComboBox) root.getChildren().get(6);
+        ListView<Author> authorsList = (ListView) root.getChildren().get(7);
+        FilteredComboBox<Category> categories = (FilteredComboBox) root.getChildren().get(8);
+        ListView<Category> categoriesList = (ListView) root.getChildren().get(9);
+        ImageView cover = (ImageView) root.getChildren().get(10);
+        TextArea about = (TextArea) root.getChildren().get(11);
+        Label doneStatus = (Label) root.getChildren().get(12);
+
+        //te co juz mam w ksiazce
+
+        title.setText(book.getTitle());
+        ISBN.setText(book.getISBN());
+        pageCount.setText((book.getPageCount() == null) ? null : book.getPageCount().toString());
+        releaseYear.setText((book.getReleaseYear() == null) ? null : book.getReleaseYear().toString());
+
+        cover.setImage((book.getCover() == null) ? null : new Image(new ByteArrayInputStream(book.getCover())));
+
+        about.setText(book.getAbout());
+
+        // te co trzeba wszystkie z bazy
+
+        List<Series> seriesList = SeriesDAO.getDAO().getAll();
+        series.set(seriesList);
+        series.getSelectionModel().select(book.getSeries());
+        series.setValue(book.getSeries());
+
+        List<Publisher> publisherList = PublisherDAO.getDAO().getAll();
+        publisher.set(publisherList);
+        publisher.getSelectionModel().select(book.getPublisher());
+        publisher.setValue(book.getPublisher());
+
+        List<Author> authorList = AuthorDAO.getDAO().getAll();
+        if(book.getAuthorList() != null){
+            authorList.removeAll(book.getAuthorList());
+            authorsList.setItems(FXCollections.observableArrayList(book.getAuthorList()));
+        }
+        authors.set(authorList);
+
+        List<Category> categoryList = CategoryDAO.getDAO().getAll();
+        if(book.getCategoryList() != null){
+            categoryList.removeAll(book.getCategoryList());
+            categoriesList.setItems(FXCollections.observableArrayList(book.getCategoryList()));
+        }
+        categories.set(categoryList);
+
+
+
         for(Node node : root.getChildren())
             node.setStyle("");
 
-//        saveStatus.setText("");
-        saveAuthorStage.hide();
-        saveAuthorStage.show();
+        doneStatus.setText("");
+        saveBookStage.hide();
+        saveBookStage.show();
+
+        return book;
     }
 
 
