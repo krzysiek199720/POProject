@@ -1,8 +1,5 @@
 package POProject.db.app.core;
 
-
-//https://dzone.com/articles/how-load-or-save-image-using
-
 import POProject.db.core.core.AbstractModel;
 import lombok.*;
 import org.hibernate.annotations.LazyCollection;

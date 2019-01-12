@@ -3,7 +3,6 @@ package POProject.db.app.db;
 import POProject.db.app.core.Author;
 import POProject.db.core.db.AbstractDAO;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AuthorDAO extends AbstractDAO<Author> {
