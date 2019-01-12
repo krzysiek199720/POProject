@@ -3,10 +3,10 @@ package POProject.controllers;
 import POProject.db.app.core.Author;
 import POProject.db.app.core.Book;
 import POProject.customNodes.AnchorSearchElem;
+import POProject.db.app.db.BookDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -23,54 +23,16 @@ import java.util.List;
 public class SearchController {
 
     @FXML
-    private TextField textField;
-
-    @FXML
-    private Button searchButton;
+    private TextField title;
 
     @FXML
     private ScrollPane searchList;
 
     public void search(ActionEvent actionEvent) throws IOException{
 
-        // TESTING TESTING
-        Author a = new Author();
-        a.setFirstName("A");
-        a.setLastName("B");
-        List<Author> authorList = new ArrayList<>();
-        authorList.add(a);
-
-        Book b = new Book();
-
-        BufferedImage bImage = ImageIO.read(new File("C:\\Users\\krzych\\Desktop\\example.png"));
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        ImageIO.write(bImage, "png", bos );
-        byte [] data = bos.toByteArray();
-        b.setCover(data);
-
-
-        b.setAuthorList(authorList);
-
-        b.setTitle("Tytulik xdd");
-
-        b.setAbout("trolloolloolololololololololololololo");
-
-        List<Book> bookList= new ArrayList<>();
-        bookList.add(b);
-        bookList.add(b);
-        bookList.add(b);
-        bookList.add(b);
-        bookList.add(b);
-        bookList.add(b);
-        bookList.add(b);
-        bookList.add(b);
-
+        List<Book> bookList = BookDAO.getDAO().getByTitle( title.getText() );
 
         searchList.setContent(generateList(bookList));
-
-
-        // ~~TESTING ~~TESTING
-
     }
 
     private VBox generateList(List<Book> bookList) throws IOException{
@@ -88,8 +50,11 @@ public class SearchController {
             //4 - about
 
             ImageView cover = (ImageView) node.getChildren().get(0);
-            Image image = new Image(new ByteArrayInputStream(book.getCover()));
-            cover.setImage( image );
+            if(book.getCover() != null){
+                Image image = new Image(new ByteArrayInputStream(book.getCover()));
+                cover.setImage( image );
+            }else
+                cover.setImage(null);
 
             Label title = (Label) node.getChildren().get(1);
             title.setText(book.getTitle());
