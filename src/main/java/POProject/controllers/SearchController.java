@@ -45,7 +45,7 @@ public class SearchController {
 
             //0 - cover
             //1 - title
-            //2 - UNEDITABLE    TODO mozna zmienic zeby sie Author: zmnienial na Authors: // ale to nie teraz bo misie nie chce
+            //2 - author: label
             //3 - authorName
             //4 - about
 
@@ -66,6 +66,9 @@ public class SearchController {
 
             Label about = (Label) node.getChildren().get(4);
             about.setText(book.getAbout());
+
+            Label autLabel = (Label) node.getChildren().get(2);
+            autLabel.setText( (book.getAuthorList().size() > 1) ? "Author:" : "Authors:" );
 
             res.getChildren().add(node);
         }
