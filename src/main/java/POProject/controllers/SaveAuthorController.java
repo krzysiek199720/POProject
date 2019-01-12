@@ -55,34 +55,36 @@ public class SaveAuthorController {
     public void done(ActionEvent actionEvent){
         Author author = anchor.getAuthor();
 
+        doneStatus.setText("");
+
         boolean terminate = false;
 
         if(firstName.getText() == null || firstName.getText().equals("")){
             setNodeToErrorColor(firstName);
             terminate = true;
-        }
+        }else setNodeToNormal(firstName);
 
         if(lastName.getText() == null || lastName.getText().equals("")){
             setNodeToErrorColor(lastName);
             terminate = true;
-        }
+        }else setNodeToNormal(lastName);
 
         if(placeOB.getText() == null || placeOB.getText().equals("")){
             setNodeToErrorColor(placeOB);
             terminate = true;
-        }
+        }else setNodeToNormal(placeOB);
 
         if(dOB.getValue() == null){
             setNodeToErrorColor(dOB);
             terminate = true;
-        }
+        }else setNodeToNormal(dOB);
 
         if(dOD.getValue() != null) {
             if(dOB.getValue().isAfter(dOD.getValue()))
             {
                 setNodeToErrorColor(dOD);
                 terminate = true;
-            }
+            }else setNodeToNormal(dOB);
         }
 
         if(terminate)
@@ -104,6 +106,7 @@ public class SaveAuthorController {
     private void setNodeToErrorColor(Node node){
         node.setStyle("-fx-background-color: #ff0000");
     }
+    private void setNodeToNormal(Node node){node.setStyle("");}
 
     public void setPhoto(ActionEvent event) throws IOException {
         FileChooser filechooser = new FileChooser();

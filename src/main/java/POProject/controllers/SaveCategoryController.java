@@ -25,15 +25,16 @@ public class SaveCategoryController {
     private Label doneStatus;
 
     public void done(ActionEvent actionEvent){
-
         Category category = anchor.getCategory();
+
+        doneStatus.setText("");
 
         boolean terminate = false;
 
         if(name.getText() == null || name.getText().equals("")){
             setNodeToErrorColor(name);
             terminate = true;
-        }
+        }else setNodeToNormal(name);
 
         if(terminate)
             return;
@@ -50,5 +51,6 @@ public class SaveCategoryController {
     private void setNodeToErrorColor(Node node){
         node.setStyle("-fx-background-color: #ff0000");
     }
+    private void setNodeToNormal(Node node){node.setStyle("");}
 
 }
