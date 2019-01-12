@@ -33,6 +33,7 @@ public class MainController implements Initializable {
     private Stage saveCategoryStage;
     private Stage saveSeriesStage;
     private Stage saveAuthorStage;
+    private Stage saveBookStage;
 
 
     private static MainController mainController;
@@ -253,12 +254,56 @@ public class MainController implements Initializable {
         saveAuthorStage.show();
     }
 
+    public void openABookStageAction(ActionEvent event) throws IOException{
+        setBookStage(new Book());
+    }
+
+    public void setBookStage(Book book) throws IOException{
+        AnchorBook root;
+
+        if(saveBookStage != null){
+            root = (AnchorBook) saveBookStage.getScene().getRoot();
+        }
+        else {
+            root = FXMLLoader.load(getClass().getResource("/fxmls/saveBook.fxml"));
+            saveBookStage = new Stage();
+            saveBookStage.setTitle("My New Stage Title");
+            saveBookStage.setScene(new Scene(root));
+            saveBookStage.resizableProperty().setValue(Boolean.FALSE);
+            saveBookStage.initStyle(StageStyle.UTILITY);
+        }
+        root.setBook(book);
+
+
+        // 0  - title
+        // 1  - ISBN
+        // 2  - pageCount
+        // 3  - releaseYear
+        // 4  - series
+        // 5  - publisher
+        // 6  - authors
+        // 7  - authorsList
+        // 8  - categories
+        // 9  - categoriesList
+        // 10 - cover
+        // 11 - about
+        // 12 - doneStatus
+
+        for(Node node : root.getChildren())
+            node.setStyle("");
+
+//        saveStatus.setText("");
+        saveAuthorStage.hide();
+        saveAuthorStage.show();
+    }
+
+
 
     // TODO this is tmp pls remove as well as the fxml button which triggers it
     public void tmpFunction(ActionEvent event)throws IOException{
 
-        Author author = AuthorDAO.getDAO().findById(1L);
-        setAuthorStage(author);
+        Book book = BookDAO.getDAO().findById(1L);
+        setBookStage(book);
     }
 
     public void initialize(URL location, ResourceBundle resources) {
