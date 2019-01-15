@@ -72,7 +72,7 @@ public class MainController implements Initializable {
     public void openPublisherStageAction(ActionEvent event) throws IOException{
         setPublisherStage(new Publisher());
     }
-    public Publisher setPublisherStage(Publisher publisher) throws IOException{
+    public void setPublisherStage(Publisher publisher) throws IOException{
 
         AnchorPublisher root;
 
@@ -110,15 +110,13 @@ public class MainController implements Initializable {
         saveStatus.setText("");
         savePublisherStage.hide();
         savePublisherStage.show();
-
-        return publisher;
     }
 
 
     public void openSeriesStageAction(ActionEvent event) throws IOException{
         setSeriesStage(new Series());
     }
-    public Series setSeriesStage(Series series) throws IOException{
+    public void setSeriesStage(Series series) throws IOException{
 
         AnchorSeries root;
 
@@ -153,14 +151,12 @@ public class MainController implements Initializable {
         saveStatus.setText("");
         saveSeriesStage.hide();
         saveSeriesStage.show();
-
-        return series;
     }
 
     public void openCategoryStageAction(ActionEvent event)throws IOException{
         setCategoryStage(new Category());
     }
-    public Category setCategoryStage(Category category) throws IOException{
+    public void setCategoryStage(Category category) throws IOException{
 
         AnchorCategory root;
 
@@ -196,13 +192,12 @@ public class MainController implements Initializable {
         saveStatus.setText("");
         saveCategoryStage.hide();
         saveCategoryStage.show();
-        return category;
     }
 
     public void openAuthorStageAction(ActionEvent event) throws IOException{
         setAuthorStage(new Author());
     }
-    public Author setAuthorStage(Author author)throws IOException{
+    public void setAuthorStage(Author author)throws IOException{
         AnchorAuthor root;
 
         if(saveAuthorStage != null){
@@ -259,15 +254,13 @@ public class MainController implements Initializable {
         saveStatus.setText("");
         saveAuthorStage.hide();
         saveAuthorStage.show();
-
-        return author;
     }
 
     public void openABookStageAction(ActionEvent event) throws IOException{
         setBookStage(new Book());
     }
 
-    public Book setBookStage(Book book) throws IOException{
+    public void setBookStage(Book book) throws IOException{
         AnchorBook root;
 
         if(saveBookStage != null){
@@ -357,8 +350,6 @@ public class MainController implements Initializable {
         doneStatus.setText("");
         saveBookStage.hide();
         saveBookStage.show();
-
-        return book;
     }
 
 

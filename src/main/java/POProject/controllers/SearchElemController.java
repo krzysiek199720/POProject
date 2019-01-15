@@ -22,13 +22,13 @@ public class SearchElemController {
     @FXML
     private Label about;
 
-    //Przy kliknieciu na tytul
+    @FXML
     private void goToBook(){
         System.out.println("I am the Glob-glo-gab-galab\nI love Books\n");
         //TODO zmieniamy okno na to ze strona ksiazki
     }
 
-    //Przy kliknieciu na autora
+    @FXML
     private void goToAuthor(){
         System.out.println("author");
         //TODO zmieniamy okno na to ze strona autora
