@@ -3,9 +3,10 @@
 <?import POProject.customNodes.AnchorSearchElem?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorSearchElem fx:id="anchor" prefHeight="120.0" prefWidth="700.0" style="-fx-border-color: black;" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="POProject.controllers.SearchElemController">
+<AnchorSearchElem fx:id="anchor" prefHeight="120.0" prefWidth="698.0" style="-fx-border-color: black;" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="POProject.controllers.SearchElemController">
    <children>
       <ImageView fx:id="cover" fitHeight="84.0" fitWidth="60.0" layoutX="14.0" layoutY="18.0" onMouseClicked="#goToBook" pickOnBounds="true" preserveRatio="true" />
       <Label fx:id="title" layoutX="150.0" layoutY="18.0" onMouseClicked="#goToBook" prefHeight="17.0" prefWidth="520.0" textFill="#4437f8">
@@ -13,12 +14,9 @@
             <Font name="System Bold" size="12.0" />
          </font></Label>
       <Label layoutX="83.0" layoutY="43.0" prefHeight="17.0" prefWidth="60.0" text="Author:" />
-      <Label fx:id="authorName" layoutX="150.0" layoutY="43.0" onMouseClicked="#goToAuthor" prefHeight="17.0" prefWidth="520.0" textFill="#4437f8">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font></Label>
       <Label fx:id="about" layoutX="150.0" layoutY="60.0" prefHeight="50.0" prefWidth="520.0" />
       <Label layoutX="83.0" layoutY="18.0" prefHeight="17.0" prefWidth="60.0" text="Title:" />
       <Label layoutX="83.0" layoutY="80.0" prefHeight="17.0" prefWidth="60.0" text="About:" />
+      <HBox fx:id="authorNameHBox" layoutX="150.0" layoutY="43.0" />
    </children>
 </AnchorSearchElem>

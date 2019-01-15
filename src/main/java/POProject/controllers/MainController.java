@@ -37,6 +37,9 @@ public class MainController implements Initializable {
     private Stage saveAuthorStage;
     private Stage saveBookStage;
 
+    private Stage authorStage;
+    private Stage bookStage;
+
 
     private static MainController mainController;
 
@@ -69,10 +72,10 @@ public class MainController implements Initializable {
         }
     }
 
-    public void openPublisherStageAction(ActionEvent event) throws IOException{
-        setPublisherStage(new Publisher());
+    public void openSavePublisherStageAction(ActionEvent event) throws IOException{
+        openSavePublisherStage(new Publisher());
     }
-    public void setPublisherStage(Publisher publisher) throws IOException{
+    public void openSavePublisherStage(Publisher publisher) throws IOException{
 
         AnchorPublisher root;
 
@@ -108,15 +111,17 @@ public class MainController implements Initializable {
             node.setStyle("");
 
         saveStatus.setText("");
-        savePublisherStage.hide();
-        savePublisherStage.show();
+        if(!savePublisherStage.isShowing())
+            savePublisherStage.show();
+        else
+            savePublisherStage.requestFocus();
     }
 
 
-    public void openSeriesStageAction(ActionEvent event) throws IOException{
-        setSeriesStage(new Series());
+    public void openSaveSeriesStageAction(ActionEvent event) throws IOException{
+        openSaveSeriesStage(new Series());
     }
-    public void setSeriesStage(Series series) throws IOException{
+    public void openSaveSeriesStage(Series series) throws IOException{
 
         AnchorSeries root;
 
@@ -149,14 +154,16 @@ public class MainController implements Initializable {
             node.setStyle("");
 
         saveStatus.setText("");
-        saveSeriesStage.hide();
-        saveSeriesStage.show();
+        if(!saveSeriesStage.isShowing())
+            saveSeriesStage.show();
+        else
+            saveSeriesStage.requestFocus();
     }
 
-    public void openCategoryStageAction(ActionEvent event)throws IOException{
-        setCategoryStage(new Category());
+    public void openSaveCategoryStageAction(ActionEvent event)throws IOException{
+        openSaveCategoryStage(new Category());
     }
-    public void setCategoryStage(Category category) throws IOException{
+    public void openSaveCategoryStage(Category category) throws IOException{
 
         AnchorCategory root;
 
@@ -190,14 +197,16 @@ public class MainController implements Initializable {
             node.setStyle("");
 
         saveStatus.setText("");
-        saveCategoryStage.hide();
-        saveCategoryStage.show();
+        if(!saveCategoryStage.isShowing())
+            saveCategoryStage.show();
+        else
+            saveCategoryStage.requestFocus();
     }
 
-    public void openAuthorStageAction(ActionEvent event) throws IOException{
-        setAuthorStage(new Author());
+    public void openSaveAuthorStageAction(ActionEvent event) throws IOException{
+        openSaveAuthorStage(new Author());
     }
-    public void setAuthorStage(Author author)throws IOException{
+    public void openSaveAuthorStage(Author author)throws IOException{
         AnchorAuthor root;
 
         if(saveAuthorStage != null){
@@ -252,15 +261,17 @@ public class MainController implements Initializable {
             node.setStyle("");
 
         saveStatus.setText("");
-        saveAuthorStage.hide();
-        saveAuthorStage.show();
+        if(!saveAuthorStage.isShowing())
+            saveAuthorStage.show();
+        else
+            saveAuthorStage.requestFocus();
     }
 
-    public void openABookStageAction(ActionEvent event) throws IOException{
-        setBookStage(new Book());
+    public void openSaveBookStageAction(ActionEvent event) throws IOException{
+        openSaveBookStage(new Book());
     }
 
-    public void setBookStage(Book book) throws IOException{
+    public void openSaveBookStage(Book book) throws IOException{
         AnchorBook root;
 
         if(saveBookStage != null){
@@ -348,8 +359,49 @@ public class MainController implements Initializable {
             node.setStyle("");
 
         doneStatus.setText("");
-        saveBookStage.hide();
-        saveBookStage.show();
+        if(!saveBookStage.isShowing())
+            saveBookStage.show();
+        else
+            saveBookStage.requestFocus();
+    }
+
+
+
+    public void openAuthor(Author author) throws IOException{
+        Parent root;
+        root = AuthorController.getNode(author);
+        if(authorStage == null){
+            authorStage = new Stage();
+            authorStage.setTitle("Author");
+            authorStage.setScene(new Scene(root));
+            authorStage.resizableProperty().setValue(Boolean.FALSE);
+            authorStage.initStyle(StageStyle.UTILITY);
+        }else
+            authorStage.getScene().setRoot(root);
+
+        if(!authorStage.isShowing())
+            authorStage.show();
+        else
+            authorStage.requestFocus();
+    }
+
+    public void openBook(Book book) throws IOException{
+
+        Parent root;
+        root = BookController.getNode(book);
+        if(bookStage == null){
+            bookStage = new Stage();
+            bookStage.setTitle("Book");
+            bookStage.setScene(new Scene(root));
+            bookStage.resizableProperty().setValue(Boolean.FALSE);
+            bookStage.initStyle(StageStyle.UTILITY);
+        }else
+            bookStage.getScene().setRoot(root);
+
+        if(!bookStage.isShowing())
+            bookStage.show();
+        else
+            bookStage.requestFocus();
     }
 
 
@@ -358,7 +410,7 @@ public class MainController implements Initializable {
     public void tmpFunction(ActionEvent event)throws IOException{
 
         Book book = BookDAO.getDAO().findById(1L);
-        setBookStage(book);
+        openSaveBookStage(book);
     }
 
     public void initialize(URL location, ResourceBundle resources) {
