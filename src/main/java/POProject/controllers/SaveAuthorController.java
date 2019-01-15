@@ -6,7 +6,9 @@ import POProject.db.app.core.enums.Sex;
 import POProject.db.app.db.AuthorDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -19,6 +21,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
+import java.time.ZoneId;
 
 public class SaveAuthorController {
 
@@ -45,6 +48,9 @@ public class SaveAuthorController {
 
     @FXML
     private RadioButton male;
+
+    @FXML
+    private RadioButton female;
 
     @FXML
     private ImageView photo;
@@ -107,6 +113,35 @@ public class SaveAuthorController {
         node.setStyle("-fx-background-color: #ff0000");
     }
     private void setNodeToNormal(Node node){node.setStyle("");}
+
+    public void prepareNode( Author author){
+        anchor.setAuthor(author);
+
+        firstName.setText(author.getFirstName());
+        lastName.setText(author.getLastName());
+        dOB.setValue( (author.getDateOfBirth() == null) ? null : author.getDateOfBirth().toInstant().atZone(ZoneId.systemDefault()).toLocalDate() );
+        dOD.setValue((author.getDateOfDeath() == null) ? null : author.getDateOfDeath().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        placeOB.setText(author.getPlaceOfBirth());
+        if(author.getSex() == Sex.male)
+            male.selectedProperty().set(true);
+        else
+            female.selectedProperty().set(true);
+        about.setText(author.getAbout());
+        photo.setImage((author.getPhoto() == null) ? null : new Image(new ByteArrayInputStream(author.getPhoto())));
+
+        doneStatus.setText("");
+
+        for(Node node : anchor.getChildren())
+            node.setStyle("");
+    }
+
+    public static Parent getNode(Author author) throws IOException {
+        FXMLLoader loader = new FXMLLoader(BookController.class.getResource("/fxmls/saveAuthor.fxml"));
+        Parent root = loader.load();
+        SaveAuthorController controller = loader.getController();
+        controller.prepareNode(author);
+        return root;
+    }
 
     public void setPhoto(ActionEvent event) throws IOException {
         FileChooser filechooser = new FileChooser();

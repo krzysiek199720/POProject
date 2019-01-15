@@ -22,7 +22,7 @@
             <ToggleGroup fx:id="Sex" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton layoutX="143.0" layoutY="123.0" mnemonicParsing="false" text="Female" toggleGroup="$Sex" />
+      <RadioButton fx:id="female" layoutX="143.0" layoutY="123.0" mnemonicParsing="false" text="Female" toggleGroup="$Sex" />
       <TextArea fx:id="about" layoutX="213.0" layoutY="155.0" prefHeight="180.0" prefWidth="462.0" wrapText="true" />
       <ImageView fx:id="photo" fitHeight="168.0" fitWidth="120.0" layoutX="43.0" layoutY="153.0" pickOnBounds="true" preserveRatio="true" />
       <Label fx:id="doneStatus" layoutX="675.0" layoutY="300.0" prefHeight="20.0" prefWidth="63.0" textAlignment="CENTER" />

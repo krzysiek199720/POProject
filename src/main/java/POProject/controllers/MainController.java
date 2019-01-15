@@ -50,17 +50,18 @@ public class MainController implements Initializable {
     public void searchAction(ActionEvent event){
 
         if(searchStage != null){
-            searchStage.show();
-            System.out.println("aaa");
+            if(!searchStage.isShowing())
+                searchStage.show();
+            else
+                searchStage.requestFocus();
             return;
         }
 
         Parent root;
-
         try {
             root = FXMLLoader.load(getClass().getResource("/fxmls/search.fxml"));
             searchStage = new Stage();
-            searchStage.setTitle("My New Stage Title");
+            searchStage.setTitle("Search");
             searchStage.setScene(new Scene(root));
             searchStage.resizableProperty().setValue(Boolean.FALSE);
             searchStage.initStyle(StageStyle.UTILITY);
@@ -76,41 +77,17 @@ public class MainController implements Initializable {
         openSavePublisherStage(new Publisher());
     }
     public void openSavePublisherStage(Publisher publisher) throws IOException{
-
-        AnchorPublisher root;
-
-        if(savePublisherStage != null){
-
-            root = (AnchorPublisher) savePublisherStage.getScene().getRoot();
-
-        }
-        else {
-            root = FXMLLoader.load(getClass().getResource("/fxmls/savePublisher.fxml"));
+        Parent root;
+        root = SavePublisherController.getNode(publisher);
+        if(savePublisherStage == null){
             savePublisherStage = new Stage();
-            savePublisherStage.setTitle("My New Stage Title");
+            savePublisherStage.setTitle("Save publisher");
             savePublisherStage.setScene(new Scene(root));
             savePublisherStage.resizableProperty().setValue(Boolean.FALSE);
             savePublisherStage.initStyle(StageStyle.UTILITY);
-        }
+        }else
+            savePublisherStage.getScene().setRoot(root);
 
-        root.setPublisher(publisher);
-
-        //  0 - name
-        //  1 - about
-        //  2 - save Status
-
-        TextField name = (TextField)root.getChildren().get(0);
-        TextArea about = (TextArea)root.getChildren().get(1);
-
-        name.setText(publisher.getName());
-        about.setText(publisher.getAbout());
-
-        Label saveStatus = (Label) root.getChildren().get(2);
-
-        for(Node node : root.getChildren())
-            node.setStyle("");
-
-        saveStatus.setText("");
         if(!savePublisherStage.isShowing())
             savePublisherStage.show();
         else
@@ -122,38 +99,17 @@ public class MainController implements Initializable {
         openSaveSeriesStage(new Series());
     }
     public void openSaveSeriesStage(Series series) throws IOException{
-
-        AnchorSeries root;
-
-        if(saveSeriesStage != null){
-            root = (AnchorSeries) saveSeriesStage.getScene().getRoot();
-        }
-        else {
-            root = FXMLLoader.load(getClass().getResource("/fxmls/saveSeries.fxml"));
+        Parent root;
+        root = SaveSeriesController.getNode(series);
+        if(saveSeriesStage == null){
             saveSeriesStage = new Stage();
-            saveSeriesStage.setTitle("My New Stage Title");
+            saveSeriesStage.setTitle("Save series");
             saveSeriesStage.setScene(new Scene(root));
             saveSeriesStage.resizableProperty().setValue(Boolean.FALSE);
             saveSeriesStage.initStyle(StageStyle.UTILITY);
-        }
-        root.setSeries(series);
+        }else
+            saveSeriesStage.getScene().setRoot(root);
 
-        //  0 - name
-        //  1 - about
-        //  2 - save Status
-
-        TextField name = (TextField)root.getChildren().get(0);
-        TextArea about = (TextArea)root.getChildren().get(1);
-
-        name.setText(series.getName());
-        about.setText(series.getAbout());
-
-        Label saveStatus = (Label) root.getChildren().get(2);
-
-        for(Node node : root.getChildren())
-            node.setStyle("");
-
-        saveStatus.setText("");
         if(!saveSeriesStage.isShowing())
             saveSeriesStage.show();
         else
@@ -164,39 +120,18 @@ public class MainController implements Initializable {
         openSaveCategoryStage(new Category());
     }
     public void openSaveCategoryStage(Category category) throws IOException{
-
-        AnchorCategory root;
-
-        if(saveCategoryStage != null){
-            root = (AnchorCategory) saveCategoryStage.getScene().getRoot();
-        }
-        else {
-            root = FXMLLoader.load(getClass().getResource("/fxmls/saveCategory.fxml"));
+        Parent root;
+        root = SaveCategoryController.getNode(category);
+        if(saveCategoryStage == null){
             saveCategoryStage = new Stage();
-            saveCategoryStage.setTitle("My New Stage Title");
+            saveCategoryStage.setTitle("Save category");
             saveCategoryStage.setScene(new Scene(root));
             saveCategoryStage.resizableProperty().setValue(Boolean.FALSE);
             saveCategoryStage.initStyle(StageStyle.UTILITY);
+        }else
+            saveCategoryStage.getScene().setRoot(root);
 
-        }
 
-        root.setCategory(category);
-
-        //  0 - name
-        //  1 - about
-        //  2 - save Status
-        TextField name = (TextField)root.getChildren().get(0);
-        TextArea about = (TextArea)root.getChildren().get(1);
-
-        name.setText(category.getName());
-        about.setText(category.getAbout());
-
-        Label saveStatus = (Label) root.getChildren().get(2);
-
-        for(Node node : root.getChildren())
-            node.setStyle("");
-
-        saveStatus.setText("");
         if(!saveCategoryStage.isShowing())
             saveCategoryStage.show();
         else
@@ -207,60 +142,18 @@ public class MainController implements Initializable {
         openSaveAuthorStage(new Author());
     }
     public void openSaveAuthorStage(Author author)throws IOException{
-        AnchorAuthor root;
-
-        if(saveAuthorStage != null){
-            root = (AnchorAuthor) saveAuthorStage.getScene().getRoot();
-        }
-        else {
-            root = FXMLLoader.load(getClass().getResource("/fxmls/saveAuthor.fxml"));
+        Parent root;
+        root = SaveAuthorController.getNode(author);
+        if(saveAuthorStage == null){
             saveAuthorStage = new Stage();
-            saveAuthorStage.setTitle("My New Stage Title");
+            saveAuthorStage.setTitle("Save author");
             saveAuthorStage.setScene(new Scene(root));
             saveAuthorStage.resizableProperty().setValue(Boolean.FALSE);
             saveAuthorStage.initStyle(StageStyle.UTILITY);
-        }
+        }else
+            saveAuthorStage.getScene().setRoot(root);
 
 
-        root.setAuthor(author);
-
-        //  0 - firstName
-        //  1 - lastName
-        //  2 - dOB
-        //  3 - dOD
-        //  4 - placeOB
-        //  5 - sex button male
-        //  6 - sex button female
-        //  7 - about
-        //  8 - photo
-
-        TextField firstName = (TextField)root.getChildren().get(0);
-        TextField lastName = (TextField)root.getChildren().get(1);
-        DatePicker dOB = (DatePicker)root.getChildren().get(2);
-        DatePicker dOD = (DatePicker)root.getChildren().get(3);
-        TextField placeOB = (TextField)root.getChildren().get(4);
-        RadioButton male = (RadioButton)root.getChildren().get(5);
-        RadioButton female = (RadioButton)root.getChildren().get(6);
-        TextArea about = (TextArea)root.getChildren().get(7);
-        ImageView photo = (ImageView)root.getChildren().get(8);
-        Label saveStatus = (Label)root.getChildren().get(9);
-
-        firstName.setText(author.getFirstName());
-        lastName.setText(author.getLastName());
-        dOB.setValue( (author.getDateOfBirth() == null) ? null : author.getDateOfBirth().toInstant().atZone(ZoneId.systemDefault()).toLocalDate() );
-        dOD.setValue((author.getDateOfDeath() == null) ? null : author.getDateOfDeath().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-        placeOB.setText(author.getPlaceOfBirth());
-        if(author.getSex() == Sex.male)
-            male.selectedProperty().set(true);
-        else
-            female.selectedProperty().set(true);
-        about.setText(author.getAbout());
-        photo.setImage((author.getPhoto() == null) ? null : new Image(new ByteArrayInputStream(author.getPhoto())));
-
-        for(Node node : root.getChildren())
-            node.setStyle("");
-
-        saveStatus.setText("");
         if(!saveAuthorStage.isShowing())
             saveAuthorStage.show();
         else
@@ -272,93 +165,17 @@ public class MainController implements Initializable {
     }
 
     public void openSaveBookStage(Book book) throws IOException{
-        AnchorBook root;
-
-        if(saveBookStage != null){
-            root = (AnchorBook) saveBookStage.getScene().getRoot();
-        }
-        else {
-            root = FXMLLoader.load(getClass().getResource("/fxmls/saveBook.fxml"));
+        Parent root;
+        root = SaveBookController.getNode(book);
+        if(saveBookStage == null){
             saveBookStage = new Stage();
-            saveBookStage.setTitle("My New Stage Title");
+            saveBookStage.setTitle("Save book");
             saveBookStage.setScene(new Scene(root));
             saveBookStage.resizableProperty().setValue(Boolean.FALSE);
             saveBookStage.initStyle(StageStyle.UTILITY);
-        }
-        root.setBook(book);
+        }else
+            saveBookStage.getScene().setRoot(root);
 
-
-        // 0  - title
-        // 1  - ISBN
-        // 2  - pageCount
-        // 3  - releaseYear
-        // 4  - series
-        // 5  - publisher
-        // 6  - authors
-        // 7  - authorsList
-        // 8  - categories
-        // 9  - categoriesList
-        // 10 - cover
-        // 11 - about
-        // 12 - doneStatus
-
-        TextField title = (TextField) root.getChildren().get(0);
-        TextField ISBN = (TextField) root.getChildren().get(1);
-        TextField pageCount = (TextField) root.getChildren().get(2);
-        TextField releaseYear = (TextField) root.getChildren().get(3);
-        FilteredComboBox<Series> series = (FilteredComboBox) root.getChildren().get(4);
-        FilteredComboBox<Publisher> publisher = (FilteredComboBox) root.getChildren().get(5);
-        FilteredComboBox<Author> authors = (FilteredComboBox) root.getChildren().get(6);
-        ListView<Author> authorsList = (ListView) root.getChildren().get(7);
-        FilteredComboBox<Category> categories = (FilteredComboBox) root.getChildren().get(8);
-        ListView<Category> categoriesList = (ListView) root.getChildren().get(9);
-        ImageView cover = (ImageView) root.getChildren().get(10);
-        TextArea about = (TextArea) root.getChildren().get(11);
-        Label doneStatus = (Label) root.getChildren().get(12);
-
-        //te co juz mam w ksiazce
-
-        title.setText(book.getTitle());
-        ISBN.setText(book.getISBN());
-        pageCount.setText((book.getPageCount() == null) ? null : book.getPageCount().toString());
-        releaseYear.setText((book.getReleaseYear() == null) ? null : book.getReleaseYear().toString());
-
-        cover.setImage((book.getCover() == null) ? null : new Image(new ByteArrayInputStream(book.getCover())));
-
-        about.setText(book.getAbout());
-
-        // te co trzeba wszystkie z bazy
-
-        List<Series> seriesList = SeriesDAO.getDAO().getAll();
-        series.set(seriesList);
-        series.getSelectionModel().select(book.getSeries());
-        series.setValue(book.getSeries());
-
-        List<Publisher> publisherList = PublisherDAO.getDAO().getAll();
-        publisher.set(publisherList);
-        publisher.getSelectionModel().select(book.getPublisher());
-        publisher.setValue(book.getPublisher());
-
-        List<Author> authorList = AuthorDAO.getDAO().getAll();
-        if(book.getAuthorList() != null){
-            authorList.removeAll(book.getAuthorList());
-            authorsList.setItems(FXCollections.observableArrayList(book.getAuthorList()));
-        }
-        authors.set(authorList);
-
-        List<Category> categoryList = CategoryDAO.getDAO().getAll();
-        if(book.getCategoryList() != null){
-            categoryList.removeAll(book.getCategoryList());
-            categoriesList.setItems(FXCollections.observableArrayList(book.getCategoryList()));
-        }
-        categories.set(categoryList);
-
-
-
-        for(Node node : root.getChildren())
-            node.setStyle("");
-
-        doneStatus.setText("");
         if(!saveBookStage.isShowing())
             saveBookStage.show();
         else

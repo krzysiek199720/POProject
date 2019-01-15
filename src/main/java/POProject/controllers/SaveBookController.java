@@ -4,10 +4,13 @@ import POProject.customNodes.AnchorBook;
 import POProject.customNodes.FilteredComboBox;
 import POProject.db.app.core.*;
 import POProject.db.app.db.*;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -141,6 +144,58 @@ public class SaveBookController  implements Initializable {
         node.setStyle("-fx-background-color: #ff0000");
     }
     private void setNodeToNormal(Node node){node.setStyle("");}
+
+    public void prepareNode( Book book){
+        anchor.setBook(book);
+
+        title.setText(book.getTitle());
+        ISBN.setText(book.getISBN());
+        pageCount.setText((book.getPageCount() == null) ? null : book.getPageCount().toString());
+        releaseYear.setText((book.getReleaseYear() == null) ? null : book.getReleaseYear().toString());
+
+        cover.setImage((book.getCover() == null) ? null : new Image(new ByteArrayInputStream(book.getCover())));
+
+        about.setText(book.getAbout());
+
+        // te co trzeba wszystkie z bazy
+
+        List<Series> seriesList = SeriesDAO.getDAO().getAll();
+        series.set(seriesList);
+        series.getSelectionModel().select(book.getSeries());
+        series.setValue(book.getSeries());
+
+        List<Publisher> publisherList = PublisherDAO.getDAO().getAll();
+        publisher.set(publisherList);
+        publisher.getSelectionModel().select(book.getPublisher());
+        publisher.setValue(book.getPublisher());
+
+        List<Author> authorList = AuthorDAO.getDAO().getAll();
+        if(book.getAuthorList() != null){
+            authorList.removeAll(book.getAuthorList());
+            authorsList.setItems(FXCollections.observableArrayList(book.getAuthorList()));
+        }
+        authors.set(authorList);
+
+        List<Category> categoryList = CategoryDAO.getDAO().getAll();
+        if(book.getCategoryList() != null){
+            categoryList.removeAll(book.getCategoryList());
+            categoriesList.setItems(FXCollections.observableArrayList(book.getCategoryList()));
+        }
+        categories.set(categoryList);
+
+        doneStatus.setText("");
+
+        for(Node node : anchor.getChildren())
+            node.setStyle("");
+    }
+
+    public static Parent getNode(Book book) throws IOException {
+        FXMLLoader loader = new FXMLLoader(AuthorController.class.getResource("/fxmls/saveBook.fxml"));
+        Parent root = loader.load();
+        SaveBookController controller = loader.getController();
+        controller.prepareNode(book);
+        return root;
+    }
 
     @FXML
     private void refreshSeries(ActionEvent event){

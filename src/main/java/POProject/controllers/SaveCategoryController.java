@@ -5,10 +5,14 @@ import POProject.db.app.core.Category;
 import POProject.db.app.db.CategoryDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+
+import java.io.IOException;
 
 public class SaveCategoryController {
 
@@ -53,4 +57,23 @@ public class SaveCategoryController {
     }
     private void setNodeToNormal(Node node){node.setStyle("");}
 
+    public void prepareNode( Category category){
+        anchor.setCategory(category);
+
+        name.setText(category.getName());
+        about.setText(category.getAbout());
+
+        doneStatus.setText("");
+
+        for(Node node : anchor.getChildren())
+            node.setStyle("");
+    }
+
+    public static Parent getNode(Category category) throws IOException {
+        FXMLLoader loader = new FXMLLoader(BookController.class.getResource("/fxmls/saveCategory.fxml"));
+        Parent root = loader.load();
+        SaveCategoryController controller = loader.getController();
+        controller.prepareNode(category);
+        return root;
+    }
 }
