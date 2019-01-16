@@ -1,14 +1,12 @@
 package POProject.db.app.core;
 
 import POProject.db.core.core.AbstractModel;
+import com.sun.org.apache.regexp.internal.RE;
 import lombok.*;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 @Getter
@@ -33,7 +31,7 @@ public class Book extends AbstractModel {
     private String about;
 
     @Column(nullable = false)
-    private Date releaseYear;
+    private Integer releaseYear;
 
     @Lob
     @Column(columnDefinition = "mediumblob")
@@ -56,40 +54,4 @@ public class Book extends AbstractModel {
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Category> categoryList;
 
-    //Custom setters
-
-    public void setReleaseYear(Integer year){
-        Calendar calendar = new GregorianCalendar();
-        calendar.set(year, 1,1);
-        this.releaseYear = new Date();
-        this.releaseYear = calendar.getTime();
-    }
-
-    //Custom getters
-
-    public Integer getReleaseYear(){
-        Calendar calendar = new GregorianCalendar();
-        if(this.releaseYear == null)
-            return null;
-        calendar.setTime(this.releaseYear);
-        return calendar.get(Calendar.YEAR);
-    }
-
-    //Custom constructors
-
-
-    public Book(@NonNull String title, @NonNull Integer pageCount, String ISBN, String about, Integer releaseYear, byte[] cover, Series series, Publisher publisher, List<Author> authorList, List<Category> categoryList) {
-        this.title = title;
-        this.pageCount = pageCount;
-        this.ISBN = ISBN;
-        this.about = about;
-        Calendar calendar = new GregorianCalendar();
-        calendar.set(releaseYear,0,1);
-        this.releaseYear = calendar.getTime();
-        this.cover = cover;
-        this.series = series;
-        this.publisher = publisher;
-        this.authorList = authorList;
-        this.categoryList = categoryList;
-    }
 }

@@ -1,28 +1,18 @@
 package POProject.controllers;
 
-import POProject.customNodes.*;
 import POProject.db.app.core.*;
-import POProject.db.app.core.enums.Sex;
-import POProject.db.app.db.*;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URL;
-import java.time.ZoneId;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
@@ -40,6 +30,10 @@ public class MainController implements Initializable {
     private Stage authorStage;
     private Stage bookStage;
 
+    //tmp TODO remove
+
+    private Stage tmpStage;
+
 
     private static MainController mainController;
 
@@ -47,30 +41,23 @@ public class MainController implements Initializable {
         return mainController;
     }
 
-    public void searchAction(ActionEvent event){
-
-        if(searchStage != null){
-            if(!searchStage.isShowing())
-                searchStage.show();
-            else
-                searchStage.requestFocus();
-            return;
-        }
+    public void searchAction(ActionEvent event) throws IOException{
 
         Parent root;
-        try {
-            root = FXMLLoader.load(getClass().getResource("/fxmls/search.fxml"));
+        root = SearchController.getNode();
+        if(searchStage == null){
             searchStage = new Stage();
             searchStage.setTitle("Search");
             searchStage.setScene(new Scene(root));
             searchStage.resizableProperty().setValue(Boolean.FALSE);
             searchStage.initStyle(StageStyle.UTILITY);
-            searchStage.show();
+        }else
+            searchStage.getScene().setRoot(root);
 
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+        if(!searchStage.isShowing())
+            searchStage.show();
+        else
+            searchStage.requestFocus();
     }
 
     public void openSavePublisherStageAction(ActionEvent event) throws IOException{
@@ -226,8 +213,21 @@ public class MainController implements Initializable {
     // TODO this is tmp pls remove as well as the fxml button which triggers it
     public void tmpFunction(ActionEvent event)throws IOException{
 
-        Book book = BookDAO.getDAO().findById(1L);
-        openSaveBookStage(book);
+        Parent root;
+        root = FXMLLoader.load(this.getClass().getResource("/fxmls/search.fxml"));
+        if(tmpStage == null){
+            tmpStage = new Stage();
+            tmpStage.setTitle("tmpStage");
+            tmpStage.setScene(new Scene(root));
+            tmpStage.resizableProperty().setValue(Boolean.FALSE);
+            tmpStage.initStyle(StageStyle.UTILITY);
+        }else
+            tmpStage.getScene().setRoot(root);
+
+        if(!tmpStage.isShowing())
+            tmpStage.show();
+        else
+            tmpStage.requestFocus();
     }
 
     public void initialize(URL location, ResourceBundle resources) {

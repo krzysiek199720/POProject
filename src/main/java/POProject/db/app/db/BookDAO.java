@@ -1,12 +1,12 @@
 package POProject.db.app.db;
 
+import POProject.db.app.api.SearchApi;
 import POProject.db.app.core.Author;
 import POProject.db.app.core.Book;
 import POProject.db.core.db.AbstractDAO;
-import org.hibernate.Criteria;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.query.Query;
 
+import javax.persistence.criteria.*;
 import java.util.List;
 
 public class BookDAO extends AbstractDAO<Book> {
@@ -45,6 +45,50 @@ public class BookDAO extends AbstractDAO<Book> {
 //                .addOrder(Order.asc(title));
 //
 //        List<Book> res = criteria.list();
+
+        closeCurrentSession();
+        return res;
+    }
+
+    public List<Book> getBySearchApi(SearchApi api){
+        openCurrentSession();
+
+        CriteriaBuilder builder = getCurrentSession().getCriteriaBuilder();
+        CriteriaQuery<Book> query = builder.createQuery(Book.class);
+        Root<Book> root = query.from(Book.class);
+        query.select(root);
+
+        if(api.getTitle() != null && !api.getTitle().equals("")){
+            String tmp = "%" + api.getTitle() + "%";
+            query.where(builder.like(root.get("title"),tmp));
+        }
+        if(api.getISBN() != null && !api.getISBN().equals("")){
+            String tmp = "%" + api.getISBN() + "%";
+            query.where(builder.like(root.get("ISBN"),tmp));
+        }
+        if(api.getYear() != null){
+            query.where(builder.equal(root.get("releaseYear"),api.getYear()));
+        }
+
+        if(api.getSeries() != null){
+            query.where(builder.equal(root.get("series"),api.getSeries()));
+        }
+
+        if(api.getPublisher() != null){
+            query.where(builder.equal(root.get("publisher"),api.getPublisher()));
+        }
+
+        if(api.getAuthor() != null){
+            query.where(root.join("authorList").in(api.getAuthor()));
+        }
+
+        if(api.getCategory() != null){
+            query.where(root.join("categoryList").in(api.getCategory()));
+        }
+
+        Query<Book> q = getCurrentSession().createQuery(query);
+
+        List<Book> res = q.getResultList();
 
         closeCurrentSession();
         return res;
