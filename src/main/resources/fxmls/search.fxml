@@ -8,9 +8,8 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="579.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="POProject.controllers.SearchController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="579.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="POProject.controllers.SearchController">
    <children>
       <Pane layoutX="2.0" prefHeight="65.0" prefWidth="750.0">
          <children>
@@ -20,7 +19,7 @@
             <CheckBox fx:id="advCheck" layoutX="650.0" layoutY="44.0" mnemonicParsing="false" onAction="#advCheck" text="Advanced" />
          </children>
       </Pane>
-      <AnchorPane fx:id="adv" disable="true" layoutY="45.0" prefHeight="33.0" prefWidth="750.0">
+      <AnchorPane fx:id="adv" disable="true" layoutY="65.0" prefHeight="33.0" prefWidth="750.0">
          <children>
             <TextField fx:id="ISBN" layoutX="68.0" layoutY="2.0" prefHeight="25.0" prefWidth="255.0" />
             <Label layoutX="25.0" layoutY="6.0" text="ISBN:" />
@@ -37,10 +36,6 @@
             <Button layoutX="665.0" layoutY="11.0" mnemonicParsing="false" onAction="#reset" text="Reset" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="-1.0" layoutY="149.0" prefHeight="169.0" prefWidth="750.0">
-         <children>
-            <ScrollPane fx:id="searchList" layoutX="25.0" layoutY="15.0" prefHeight="388.0" prefWidth="700.0" />
-         </children>
-      </AnchorPane>
+      <ScrollPane fx:id="searchList" layoutX="27.0" layoutY="167.0" prefHeight="398.0" prefWidth="700.0" />
    </children>
-</VBox>
+</AnchorPane>
