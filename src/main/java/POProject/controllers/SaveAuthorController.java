@@ -25,7 +25,7 @@ import java.time.ZoneId;
 
 public class SaveAuthorController {
 
-    @FXML// TODO for now anchor pane may want to change as written below
+    @FXML
     private AnchorAuthor anchor;
 
     @FXML

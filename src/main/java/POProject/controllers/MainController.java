@@ -3,7 +3,6 @@ package POProject.controllers;
 import POProject.db.app.core.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -29,10 +28,6 @@ public class MainController implements Initializable {
 
     private Stage authorStage;
     private Stage bookStage;
-
-    //tmp TODO remove
-
-    private Stage tmpStage;
 
 
     private static MainController mainController;
@@ -206,28 +201,6 @@ public class MainController implements Initializable {
             bookStage.show();
         else
             bookStage.requestFocus();
-    }
-
-
-
-    // TODO this is tmp pls remove as well as the fxml button which triggers it
-    public void tmpFunction(ActionEvent event)throws IOException{
-
-        Parent root;
-        root = FXMLLoader.load(this.getClass().getResource("/fxmls/search.fxml"));
-        if(tmpStage == null){
-            tmpStage = new Stage();
-            tmpStage.setTitle("tmpStage");
-            tmpStage.setScene(new Scene(root));
-            tmpStage.resizableProperty().setValue(Boolean.FALSE);
-            tmpStage.initStyle(StageStyle.UTILITY);
-        }else
-            tmpStage.getScene().setRoot(root);
-
-        if(!tmpStage.isShowing())
-            tmpStage.show();
-        else
-            tmpStage.requestFocus();
     }
 
     public void initialize(URL location, ResourceBundle resources) {

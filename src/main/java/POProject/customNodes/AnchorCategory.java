@@ -1,7 +1,6 @@
 package POProject.customNodes;
 
 import POProject.db.app.core.Category;
-import POProject.db.app.core.Series;
 import javafx.scene.layout.AnchorPane;
 import lombok.Getter;
 import lombok.Setter;

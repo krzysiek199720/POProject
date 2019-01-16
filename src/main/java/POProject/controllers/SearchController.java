@@ -85,7 +85,6 @@ public class SearchController implements Initializable {
 
     @FXML
     public void search(ActionEvent actionEvent) throws IOException{
-        //TODO api i takie tam
         if(adv.isDisabled())
         {
             List<Book> bookList = BookDAO.getDAO().getByTitle( title.getText() );
