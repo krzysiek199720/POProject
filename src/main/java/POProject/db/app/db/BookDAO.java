@@ -29,6 +29,15 @@ public class BookDAO extends AbstractDAO<Book> {
         return res;
     }
 
+    public List<Book> getByISBN(String isbn){
+        openCurrentSession();
+
+        List<Book> res = getCurrentSession().createQuery("from Book where isbn like '"+isbn+ "' order by title" ).list();
+
+        closeCurrentSession();
+        return res;
+    }
+
     public List<Book> getByTitle(String title){
 
         if( title == null || title.isEmpty())
@@ -39,12 +48,6 @@ public class BookDAO extends AbstractDAO<Book> {
         String searchVal = "%" + title + "%";
 
         List<Book> res = (List<Book>) getCurrentSession().createQuery("from Book where title like '"+searchVal+ "' order by title" ).list();
-
-//        Criteria criteria = getCurrentSession().createCriteria(Book.class);
-//        criteria.add(Restrictions.like("title",searchVal))
-//                .addOrder(Order.asc(title));
-//
-//        List<Book> res = criteria.list();
 
         closeCurrentSession();
         return res;
