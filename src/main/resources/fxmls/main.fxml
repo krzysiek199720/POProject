@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.Pane?>
+<?import java.lang.String?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="224.0" prefWidth="152.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="POProject.controllers.MainController">
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="220.0" prefWidth="150.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="POProject.controllers.MainController">
+   <stylesheets>
+      <String fx:value="appStyle"/>
+   </stylesheets>
    <children>
-      <Button fx:id="searchButton" layoutX="50.0" layoutY="14.0" mnemonicParsing="false" onAction="#searchAction" text="Search" />
-      <Button layoutX="43.0" layoutY="48.0" mnemonicParsing="false" onAction="#openSaveBookStageAction" text="Add Book" />
-      <Button layoutX="32.0" layoutY="184.0" mnemonicParsing="false" onAction="#openSavePublisherStageAction" text="Add Publisher" />
-      <Button layoutX="32.0" layoutY="150.0" mnemonicParsing="false" onAction="#openSaveCategoryStageAction" text="Add Category" />
-      <Button layoutX="41.0" layoutY="117.0" mnemonicParsing="false" onAction="#openSaveSeriesStageAction" text="Add Series" />
-      <Button layoutX="36.0" layoutY="83.0" mnemonicParsing="false" onAction="#openSaveAuthorStageAction" text="Add Author" />
+      <Button fx:id="searchButton" layoutX="30.0" layoutY="10.0" mnemonicParsing="false" onAction="#searchAction" prefHeight="25.0" prefWidth="90.0" text="Search" />
+      <Button layoutX="30.0" layoutY="45.0" mnemonicParsing="false" onAction="#openSaveBookStageAction" prefHeight="25.0" prefWidth="90.0" text="Add Book" />
+      <Button layoutX="30.0" layoutY="185.0" mnemonicParsing="false" onAction="#openSavePublisherStageAction" prefHeight="25.0" prefWidth="90.0" text="Add Publisher" />
+      <Button layoutX="30.0" layoutY="150.0" mnemonicParsing="false" onAction="#openSaveCategoryStageAction" prefHeight="25.0" prefWidth="90.0" text="Add Category" />
+      <Button layoutX="30.0" layoutY="115.0" mnemonicParsing="false" onAction="#openSaveSeriesStageAction" prefHeight="25.0" prefWidth="90.0" text="Add Series" />
+      <Button layoutX="30.0" layoutY="80.0" mnemonicParsing="false" onAction="#openSaveAuthorStageAction" prefHeight="25.0" prefWidth="90.0" text="Add Author" />
    </children>
-</Pane>
+</AnchorPane>

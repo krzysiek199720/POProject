@@ -45,7 +45,6 @@ public class Book extends AbstractModel {
     @JoinColumn(name="publisherId", nullable = false)
     private Publisher publisher;
 
-
     @ManyToMany
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Author> authorList;

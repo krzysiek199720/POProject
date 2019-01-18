@@ -23,7 +23,6 @@ public class POProjectApplication extends Application {
     public static void main(String[] args){
         HibernateUtils.OpenConnection("hibernate.cfg.xml");
 
-
         //TESTING TESTING
 
         Date date = new Date(1546988400000L);
@@ -60,7 +59,6 @@ public class POProjectApplication extends Application {
 
 
         //~~TESTING ~~TESTING
-
 
         launch(args);
     }

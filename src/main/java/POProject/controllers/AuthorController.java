@@ -4,6 +4,7 @@ import POProject.customNodes.AnchorAuthor;
 import POProject.db.app.core.Author;
 import POProject.db.app.core.enums.Sex;
 import POProject.db.app.db.AuthorDAO;
+import POProject.db.app.db.BookDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -45,6 +46,12 @@ public class AuthorController {
     @FXML
     private void openModify()throws IOException{
         MainController.getInstance().openSaveAuthorStage(anchor.getAuthor());
+    }
+
+    @FXML
+    private void remove(){
+        AuthorDAO.getDAO().delete(anchor.getAuthor());
+        MainController.getInstance().closeAuthor();
     }
 
     @FXML

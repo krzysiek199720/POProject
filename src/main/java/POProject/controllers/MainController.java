@@ -28,6 +28,9 @@ public class MainController implements Initializable {
 
     private Stage authorStage;
     private Stage bookStage;
+    private Stage categoryStage;
+    private Stage seriesStage;
+    private Stage publisherStage;
 
 
     private static MainController mainController;
@@ -35,6 +38,20 @@ public class MainController implements Initializable {
     public static MainController getInstance(){
         return mainController;
     }
+
+    public void closeBook(){
+        bookStage.hide();
+    }
+
+    public void closeAuthor(){
+        authorStage.hide();
+    }
+
+    public void closeCategory(){categoryStage.hide();}
+
+    public void closeSeries(){seriesStage.hide();}
+
+    public void closePublisher(){publisherStage.hide();}
 
     public void searchAction(ActionEvent event) throws IOException{
 
@@ -201,6 +218,63 @@ public class MainController implements Initializable {
             bookStage.show();
         else
             bookStage.requestFocus();
+    }
+
+    public void openCategory(Category category) throws IOException{
+
+        Parent root;
+        root = CategoryController.getNode(category);
+        if(categoryStage == null){
+            categoryStage = new Stage();
+            categoryStage.setTitle("Category");
+            categoryStage.setScene(new Scene(root));
+            categoryStage.resizableProperty().setValue(Boolean.FALSE);
+            categoryStage.initStyle(StageStyle.UTILITY);
+        }else
+            categoryStage.getScene().setRoot(root);
+
+        if(!categoryStage.isShowing())
+            categoryStage.show();
+        else
+            categoryStage.requestFocus();
+    }
+
+    public void openSeries(Series series) throws IOException{
+
+        Parent root;
+        root = SeriesController.getNode(series);
+        if(seriesStage == null){
+            seriesStage = new Stage();
+            seriesStage.setTitle("Series");
+            seriesStage.setScene(new Scene(root));
+            seriesStage.resizableProperty().setValue(Boolean.FALSE);
+            seriesStage.initStyle(StageStyle.UTILITY);
+        }else
+            seriesStage.getScene().setRoot(root);
+
+        if(!seriesStage.isShowing())
+            seriesStage.show();
+        else
+            seriesStage.requestFocus();
+    }
+
+    public void openPublisher(Publisher publisher) throws IOException{
+
+        Parent root;
+        root = PublisherController.getNode(publisher);
+        if(publisherStage == null){
+            publisherStage = new Stage();
+            publisherStage.setTitle("Publisher");
+            publisherStage.setScene(new Scene(root));
+            publisherStage.resizableProperty().setValue(Boolean.FALSE);
+            publisherStage.initStyle(StageStyle.UTILITY);
+        }else
+            publisherStage.getScene().setRoot(root);
+
+        if(!publisherStage.isShowing())
+            publisherStage.show();
+        else
+            publisherStage.requestFocus();
     }
 
     public void initialize(URL location, ResourceBundle resources) {

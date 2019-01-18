@@ -83,11 +83,6 @@ public class SaveBookController  implements Initializable {
         if(ISBN.getText() == null || ISBN.getText().equals("") || !ISBN.getText().matches("\\d*") || ISBN.getText().length() != 13 ){
             setNodeToErrorColor(ISBN);
             terminate = true;
-        }else
-        if(!BookDAO.getDAO().getByISBN(ISBN.getText()).contains(book)){
-            doneStatus.setText("ISBN taken");
-            setNodeToErrorColor(ISBN);
-            terminate = true;
         }else setNodeToNormal(ISBN);
 
         if(title.getText() == null || title.getText().equals("")){
@@ -115,11 +110,6 @@ public class SaveBookController  implements Initializable {
             setNodeToErrorColor(authorsList);
             terminate = true;
         }else setNodeToNormal(authorsList);
-
-        if(categoriesList.getItems().size() < 1){
-            setNodeToErrorColor(categoriesList);
-            terminate = true;
-        }else setNodeToNormal(categoriesList);
 
         if(terminate) return;
 

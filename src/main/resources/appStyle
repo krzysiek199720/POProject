@@ -1,0 +1,17 @@
+
+#anchor{
+    -fx-background-color: rgba(222,222,230,0.9)
+}
+
+#ElemAnchor{
+-fx-background-color: rgba(202,202,210,0.9);
+}
+
+#searchList > .viewport {
+   -fx-background-color: transparent;
+}
+
+#searchList{
+-fx-background-color: rgba(242,242,250,0.9);
+
+}

@@ -1,10 +1,10 @@
 package POProject.controllers;
 
-import POProject.customNodes.AnchorBook;
-import POProject.customNodes.AuthorLabel;
+import POProject.customNodes.*;
 import POProject.db.app.core.Author;
 import POProject.db.app.core.Book;
 import POProject.db.app.core.Category;
+import POProject.db.app.core.Series;
 import POProject.db.app.db.BookDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -37,16 +37,16 @@ public class BookController {
     private Label year;
 
     @FXML
-    private Label series;
+    private HBox series;
 
     @FXML
-    private Label publisher;
+    private HBox publisher;
 
     @FXML
     private HBox authors;
 
     @FXML
-    private Label categories;
+    private HBox categories;
 
     @FXML
     private ImageView cover;
@@ -57,6 +57,12 @@ public class BookController {
     @FXML
     private void openModify()throws IOException{
         MainController.getInstance().openSaveBookStage(anchor.getBook());
+    }
+
+    @FXML
+    private void remove(){
+        BookDAO.getDAO().delete(anchor.getBook());
+        MainController.getInstance().closeBook();
     }
 
     @FXML
@@ -71,14 +77,47 @@ public class BookController {
         ISBN.setText(book.getISBN());
         pages.setText(book.getPageCount().toString());
         year.setText(book.getReleaseYear().toString());
-        series.setText(book.getSeries().toString());
-        publisher.setText(book.getPublisher().toString());
+
+        series.getChildren().removeAll(series.getChildren());
+        SeriesLabel serName = new SeriesLabel(book.getSeries().toString(), book.getSeries());
+        serName.setOnMouseClicked(event -> {
+            try{
+                MainController.getInstance().openSeries(serName.getSeries());
+            }catch(IOException e){}
+        });
+        serName.paddingProperty().setValue(new Insets(0,20,0,0));
+        serName.setStyle("-fx-text-fill: blue");
+        series.getChildren().add(serName);
+
+        publisher.getChildren().removeAll(publisher.getChildren());
+        PublisherLabel pubName = new PublisherLabel(book.getPublisher().toString(), book.getPublisher());
+        pubName.setOnMouseClicked(event -> {
+            try{
+                MainController.getInstance().openPublisher(pubName.getPublisher());
+            }catch(IOException e){}
+        });
+        pubName.paddingProperty().setValue(new Insets(0,20,0,0));
+        pubName.setStyle("-fx-text-fill: blue");
+        publisher.getChildren().add(pubName);
+
         cover.setImage((book.getCover() != null) ? new Image(new ByteArrayInputStream(book.getCover())) : null);
         about.setText(book.getAbout());
 
-        categories.setText("");
-        for(Category category : book.getCategoryList())
-            categories.setText(categories.getText() + category.toString() + "\t");
+        categories.getChildren().removeAll(categories.getChildren());
+        for(Category category : book.getCategoryList()){
+            CategoryLabel name = new CategoryLabel(category.toString(), category);
+
+            name.setOnMouseClicked(event -> {
+                try{
+                    MainController.getInstance().openCategory(name.getCategory());
+                }catch(IOException e){}
+            });
+
+            name.paddingProperty().setValue(new Insets(0,20,0,0));
+            name.setStyle("-fx-text-fill: blue");
+
+            categories.getChildren().add(name);
+        }
 
         authors.getChildren().removeAll(authors.getChildren());
         for(Author author : book.getAuthorList()){

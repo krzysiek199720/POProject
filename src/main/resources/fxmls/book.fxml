@@ -8,7 +8,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
+<?import java.lang.String?>
 <AnchorBook fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="417.0" prefWidth="812.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="POProject.controllers.BookController">
+   <stylesheets>
+      <String fx:value="appStyle"/>
+   </stylesheets>
    <children>
       <Label fx:id="title" layoutX="230.0" layoutY="15.0" prefHeight="50.0" prefWidth="570.0" text="title" textAlignment="CENTER">
          <font>
@@ -18,19 +22,20 @@
       <Label fx:id="ISBN" alignment="CENTER" layoutX="14.0" layoutY="314.0" prefHeight="30.0" prefWidth="200.0" text="ISBN" textAlignment="CENTER" />
       <Label fx:id="pages" layoutX="55.0" layoutY="385.0" prefHeight="17.0" prefWidth="49.0" text="Label" />
       <Label fx:id="year" layoutX="85.0" layoutY="355.0" prefHeight="17.0" prefWidth="126.0" text="Label" />
-      <Label fx:id="series" layoutX="300.0" layoutY="102.0" prefHeight="17.0" prefWidth="478.0" text="Label" />
-      <Label fx:id="publisher" layoutX="300.0" layoutY="156.0" prefHeight="17.0" prefWidth="478.0" text="Label" />
+      <HBox fx:id="series" layoutX="300.0" layoutY="102.0" prefHeight="17.0" prefWidth="478.0" />
+      <HBox fx:id="publisher" layoutX="300.0" layoutY="156.0" prefHeight="17.0" prefWidth="478.0" />
       <HBox fx:id="authors" layoutX="230.0" layoutY="65.0" />
-      <Label fx:id="categories" layoutX="300.0" layoutY="128.0" prefHeight="17.0" prefWidth="478.0" text="Label" />
+      <HBox fx:id="categories" layoutX="300.0" layoutY="128.0" prefHeight="17.0" prefWidth="478.0" />
       <ImageView fx:id="cover" fitHeight="300.0" fitWidth="200.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-      <TextArea fx:id="about" layoutX="230.0" layoutY="212.0" prefHeight="192.0" prefWidth="570.0" />
+      <TextArea fx:id="about" editable="false" wrapText="true" layoutX="230.0" layoutY="212.0" prefHeight="192.0" prefWidth="570.0" />
       <Label layoutX="230.0" layoutY="128.0" text="Categories:" />
       <Label layoutX="230.0" layoutY="102.0" text="Series:" />
       <Label layoutX="230.0" layoutY="156.0" text="Publisher:" />
       <Label layoutX="15.0" layoutY="385.0" text="Pages:" />
       <Label layoutX="15.0" layoutY="355.0" prefHeight="17.0" prefWidth="51.0" text="Released:" />
       <Label layoutX="229.0" layoutY="187.0" text="About:" />
-      <Button layoutX="746.0" layoutY="185.0" mnemonicParsing="false" onAction="#openModify" prefWidth="54.0" text="Modify" />
-      <Button layoutX="680.0" layoutY="185.0" mnemonicParsing="false" onAction="#refresh" prefHeight="25.0" prefWidth="60.0" text="Refresh" />
+      <Button layoutX="600.0" layoutY="185.0" mnemonicParsing="false" onAction="#refresh" prefHeight="25.0" prefWidth="60.0" text="Refresh" />
+      <Button layoutX="670.0" layoutY="185.0" mnemonicParsing="false" onAction="#openModify" prefWidth="54.0" text="Modify" />
+      <Button layoutX="730.0" layoutY="185.0" mnemonicParsing="false" onAction="#remove" prefWidth="70.0" text="Remove" />
    </children>
 </AnchorBook>

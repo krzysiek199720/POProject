@@ -7,7 +7,11 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.text.Font?>
 
+<?import java.lang.String?>
 <AnchorAuthor fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="379.0" prefWidth="812.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="POProject.controllers.AuthorController">
+   <stylesheets>
+      <String fx:value="appStyle"/>
+   </stylesheets>
    <children>
       <Label fx:id="name" layoutX="230.0" layoutY="15.0" prefHeight="50.0" prefWidth="570.0" text="name" textAlignment="CENTER">
          <font>
@@ -19,12 +23,13 @@
       <Label fx:id="pob" layoutX="308.0" layoutY="119.0" prefHeight="17.0" prefWidth="478.0" text="pob" />
       <Label fx:id="dod" layoutX="321.0" layoutY="91.0" prefHeight="17.0" prefWidth="478.0" text="dod" />
       <ImageView fx:id="photo" fitHeight="300.0" fitWidth="200.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-      <TextArea fx:id="about" layoutX="231.0" layoutY="175.0" prefHeight="192.0" prefWidth="570.0" />
+      <TextArea fx:id="about" editable="false" wrapText="true" layoutX="231.0" layoutY="175.0" prefHeight="192.0" prefWidth="570.0" />
       <Label layoutX="231.0" layoutY="91.0" text="Date of Death:" />
       <Label layoutX="231.0" layoutY="65.0" text="Date of Birth:" />
       <Label layoutX="231.0" layoutY="119.0" text="Place of Birth:" />
       <Label layoutX="230.0" layoutY="150.0" text="About:" />
-      <Button layoutX="170.0" layoutY="344.0" mnemonicParsing="false" onAction="#openModify" text="Modify" />
-      <Button layoutX="108.0" layoutY="344.0" mnemonicParsing="false" onAction="#refresh" text="Refresh" />
+      <Button layoutX="600.0" layoutY="145.0" mnemonicParsing="false" onAction="#refresh" prefHeight="25.0" prefWidth="60.0" text="Refresh" />
+      <Button layoutX="670.0" layoutY="145.0" mnemonicParsing="false" onAction="#openModify" prefWidth="54.0" text="Modify" />
+      <Button layoutX="730.0" layoutY="145.0" mnemonicParsing="false" onAction="#remove" prefWidth="70.0" text="Remove" />
    </children>
 </AnchorAuthor>

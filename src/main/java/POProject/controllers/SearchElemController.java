@@ -19,7 +19,7 @@ import java.io.IOException;
 public class SearchElemController {
 
     @FXML
-    private AnchorSearchElem anchor;
+    private AnchorSearchElem ElemAnchor;
 
     @FXML
     private ImageView cover;
@@ -36,14 +36,14 @@ public class SearchElemController {
     @FXML
     private void goToBook(){
         try{
-        MainController.getInstance().openBook(anchor.getBook());
+        MainController.getInstance().openBook(ElemAnchor.getBook());
         }catch(IOException e){
             e.printStackTrace();
         }
     }
 
     public void prepareNode( Book book){
-        anchor.setBook(book);
+        ElemAnchor.setBook(book);
         cover.setImage((book.getCover() != null) ? new Image(new ByteArrayInputStream(book.getCover())) : null);
         title.setText(book.getTitle());
         about.setText(book.getAbout());

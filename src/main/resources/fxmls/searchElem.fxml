@@ -6,7 +6,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorSearchElem fx:id="anchor" prefHeight="120.0" prefWidth="698.0" style="-fx-border-color: black;" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="POProject.controllers.SearchElemController">
+<?import java.lang.String?>
+<AnchorSearchElem fx:id="ElemAnchor" prefHeight="120.0" prefWidth="698.0" style="-fx-border-color: black;" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="POProject.controllers.SearchElemController">
+   <stylesheets>
+      <String fx:value="appStyle"/>
+   </stylesheets>
    <children>
       <ImageView fx:id="cover" fitHeight="84.0" fitWidth="60.0" layoutX="14.0" layoutY="18.0" onMouseClicked="#goToBook" pickOnBounds="true" preserveRatio="true" />
       <Label fx:id="title" layoutX="150.0" layoutY="18.0" onMouseClicked="#goToBook" prefHeight="17.0" prefWidth="520.0" textFill="#4437f8">

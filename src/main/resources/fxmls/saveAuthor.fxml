@@ -10,7 +10,11 @@
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.ImageView?>
 
+<?import java.lang.String?>
 <AnchorAuthor fx:id="anchor" prefHeight="364.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="POProject.controllers.SaveAuthorController">
+   <stylesheets>
+      <String fx:value="appStyle"/>
+   </stylesheets>
    <children>
       <TextField fx:id="firstName" layoutX="70.0" layoutY="39.0" prefHeight="25.0" prefWidth="264.0" />
       <TextField fx:id="lastName" layoutX="70.0" layoutY="74.0" prefHeight="25.0" prefWidth="264.0" />
